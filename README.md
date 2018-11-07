@@ -7,11 +7,11 @@ OpenCVを使って画像から顔認識を行い、😇に変換します。
 
 #### STEP1 Install OpenCV
 ```
-pip install opencv-python
+pip install opencv-python -t .
 ```
 or
 ```
-pip install -r requirements.txt
+pip install -r requirements.txt -t.
 ```
 
 #### STEP2 Generate inputs and outputs directory.
