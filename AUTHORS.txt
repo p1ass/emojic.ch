@@ -1,0 +1,4 @@
+Naoki Kishi <@plus_kyoto>
+
+Copyright (c) 2018 Twitter, Inc and other contributors
+https://github.com/twitter/twemoji
