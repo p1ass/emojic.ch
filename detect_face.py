@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 from pathlib import Path
 
 path = Path("./outputs/")
@@ -9,7 +10,6 @@ for file in path.iterdir():
 
 path = Path("./inputs/")
 
-angel = cv2.imread("emoji/angel.png",)
 
 for file in path.iterdir():
 
@@ -25,7 +25,6 @@ for file in path.iterdir():
 
 	#ファイル読み込み
 	image = cv2.imread(image_path)
-
 	# カラーとグレースケールで場合分け
 	if len(image.shape) == 3:
 		height, width, channels = image.shape[:3]
@@ -55,8 +54,20 @@ for file in path.iterdir():
 
 		#検出した顔を囲む矩形の作成
 		for face in faces:
-			resized_angel = cv2.resize(angel,(face[2],face[3]))
 
-			image[face[1]:face[1]+face[2],face[0]:face[0]+face[3]] = resized_angel
+			# 透過処理
+			# https://blanktar.jp/blog/2015/02/python-opencv-overlay.html
+			angel = cv2.imread("emoji/angel.png",-1)
+
+			resized_angel = cv2.resize(angel,(face[2],face[3]))
+			mask = resized_angel[:,:,3]
+			mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
+			mask = mask / 255.0 
+			
+			image = image.astype("float64")
+			print(resized_angel.shape)
+
+			image[face[1]:face[1]+face[2],face[0]:face[0]+face[3]] *= 1 -mask
+			image[face[1]:face[1]+face[2],face[0]:face[0]+face[3]] += mask * resized_angel[:,:,0:3]
 			#認識結果の保存
 			cv2.imwrite(output_path, image)
