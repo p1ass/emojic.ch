@@ -3,6 +3,8 @@ import numpy as np
 from pathlib import Path
 import io
 from PIL import Image
+import base64
+import json
 
 
 # image : 画像配列
@@ -54,6 +56,7 @@ def detectFaces(image, min_face_size_ratio):
 # binary : 画像のバイナリデータ
 # 返り値 : OpenCV用の画像の配列データ
 # 参考 : https://qiita.com/rrryutaro/items/ce6634a37a257adc4fb1
+# 参考 : https://qiita.com/wasnot/items/be649f289073fb96513b
 def convertBinaryToImage(binary):
 
 	# 一旦Pillow用の画像データにする
@@ -63,7 +66,54 @@ def convertBinaryToImage(binary):
 	image_plus_alpha = np.asarray(pil_image) 
 
 	# OpenCVで扱えるBGR形式に変換
-	return cv2.cvtColor(image_plus_alpha, cv2.COLOR_RGBA2BGR)
+	# return cv2.cvtColor(image_plus_alpha, cv2.COLOR_RGBA2BGR)
+	return image_plus_alpha
+
+
+
+# 参考 : https://qiita.com/is_ryo/items/966f720227cab2fff7f9
+# 参考 : https://dev.classmethod.jp/cloud/aws/sugano-013-api-gateway/
+def lambda_handler(event, context):
+
+	# 送られてきたデータから画像ファイルを取得
+	# multipart/form-dataのfileキーの画像を取得する
+	try:
+		binary_image = base64.b64decode(event["body"])
+		image = convertBinaryToImage(binary_image)
+
+		faces = detectFaces(image,0.12)
+		angel = cv2.imread("emoji/angel.png",-1) # -1 : アルファチャンネルで読み込む
+
+		for face in faces:
+			image = pasteEmoji(image,face, angel)
+
+		# PIL.Imageに変換
+
+		# レスポンス用のバイナリイメージを作成
+		# 参考 : https://stackoverrun.com/ja/q/7582988
+		pasted_binary_image = io.BytesIO()
+		Image.fromarray(image.astype('uint8')).save(pasted_binary_image,"JPEG")
+
+		# レスポンスを作成
+		response = {
+			"statusCode": 200,
+			"headers" : {
+				"Content-Type": "'image/jpeg'",
+			},
+			"body" : base64.b64encode(pasted_binary_image.getvalue())
+		}
+
+		return response
+	
+	except Exception as e:
+		print(e)
+		response = {
+			"statusCode" : 400,
+			"body": json.dumps({"error": "can't return image."})
+
+		}
+
+		return response
 
 
 def main():
@@ -93,6 +143,15 @@ def main():
 
 		#認識結果の保存
 		cv2.imwrite(str(output_path), image)
+
+
+def test():
+
+	with open("test.jpg", "rb") as f:
+		img_binary = f.read()
+
+		event = {"body":base64.b64encode(img_binary)}
+		lambda_handler(event,{})
 
 
 if __name__ == "__main__":
