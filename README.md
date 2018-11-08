@@ -11,7 +11,7 @@ pip install opencv-python -t .
 ```
 or
 ```
-pip install -r requirements.txt -t.
+pip install -r requirements.txt -t .
 ```
 
 #### STEP2 Generate inputs and outputs directory.

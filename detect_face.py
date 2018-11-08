@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 from pathlib import Path
+import io
+from PIL import Image
+
 
 # image : 画像配列
 # face : 顔認識結果
@@ -48,6 +51,21 @@ def detectFaces(image, min_face_size_ratio):
 	return faces
 
 
+# binary : 画像のバイナリデータ
+# 返り値 : OpenCV用の画像の配列データ
+# 参考 : https://qiita.com/rrryutaro/items/ce6634a37a257adc4fb1
+def convertBinaryToImage(binary):
+
+	# 一旦Pillow用の画像データにする
+	pil_image = Image.open(io.BytesIO(binary))
+
+	#RGBA画像に変換
+	image_plus_alpha = np.asarray(pil_image) 
+
+	# OpenCVで扱えるBGR形式に変換
+	return cv2.cvtColor(image_plus_alpha, cv2.COLOR_RGBA2BGR)
+
+
 def main():
 
 	# 先にアウトプットディレクトリを削除しておく
@@ -57,6 +75,7 @@ def main():
 
 	inputs_path = Path("./inputs/")
 
+	# inputsディレクトリに入っているすべての画像でface2emojiを行う
 	for file in inputs_path.iterdir():
 		image_file = str(file.name)
 		image_path = inputs_path / image_file
@@ -69,7 +88,7 @@ def main():
 
 		for face in faces:
 
-			angel = cv2.imread("emoji/angel.png",-1)
+			angel = cv2.imread("emoji/angel.png",-1) # -1 : アルファチャンネルで読み込む
 			image = pasteEmoji(image, face, angel)
 
 		#認識結果の保存
