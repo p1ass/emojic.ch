@@ -1,9 +1,13 @@
-#画像入出力ディレクトリを除外
+# 画像入出力ディレクトリを除外
 /outputs/
 /inputs/
 
-#OpenCVライブラリを除外
+# OpenCVライブラリを除外
 /cv2/
 /bin/
 /numpy*/
 /opencv*/
+
+# Pillowを除外
+/PIL/
+/Pillow*/
