@@ -11,3 +11,5 @@
 # Pillowを除外
 /PIL/
 /Pillow*/
+
+upload.zip
