@@ -6,12 +6,18 @@ from PIL import Image
 import base64
 import json
 
+# 参考 : https://qiita.com/akitsukada/items/e6d8fe68c49973d1edf6
+# 参考 : http://blog.pchw.io/xentry/2018/04/12/094351
+# 参考 : http://xp-cloud.jp/blog/2018/07/12/3876/
 
-# image : 画像配列
+# image : 画像配列。RGBけいｓ機
 # face : 顔認識結果
-# emoji : 使いたい絵文字画像。imreadの時に-1を指定してアルファチャンネル込で読み込む
+# emoji : 使いたい絵文字画像。imreadの時に-1を指定してアルファチャンネル込で読み込む。 OpenCV(GBR)形式
 # 返り値 : 絵文字を合成した画像
 def pasteEmoji(image,face, emoji):
+
+	# RGBに変換しておく
+	emoji = cv2.cvtColor(emoji, cv2.COLOR_BGRA2RGBA)
 	resized_emoji = cv2.resize(emoji,(face[2],face[3])) #絵文字の画像サイズを顔の大きさに揃える
 
 	# 透過処理
@@ -54,7 +60,7 @@ def detectFaces(image, min_face_size_ratio):
 
 
 # binary : 画像のバイナリデータ
-# 返り値 : OpenCV用の画像の配列データ
+# 返り値 : RGBAの画像の配列データ
 # 参考 : https://qiita.com/rrryutaro/items/ce6634a37a257adc4fb1
 # 参考 : https://qiita.com/wasnot/items/be649f289073fb96513b
 def convertBinaryToImage(binary):
@@ -65,8 +71,6 @@ def convertBinaryToImage(binary):
 	#RGBA画像に変換
 	image_plus_alpha = np.asarray(pil_image) 
 
-	# OpenCVで扱えるBGR形式に変換
-	# return cv2.cvtColor(image_plus_alpha, cv2.COLOR_RGBA2BGR)
 	return image_plus_alpha
 
 
@@ -95,13 +99,23 @@ def lambda_handler(event, context):
 		Image.fromarray(image.astype('uint8')).save(pasted_binary_image,"JPEG")
 
 		# レスポンスを作成
+		body = base64.b64encode(pasted_binary_image.getvalue()).decode('utf-8')
 		response = {
 			"statusCode": 200,
 			"headers" : {
 				"Content-Type": "'image/jpeg'",
 			},
-			"body" : base64.b64encode(pasted_binary_image.getvalue())
+			"body" : body,
+			"isBase64Encoded": True
 		}
+
+		# 出力確認用
+		# test = base64.b64decode(body)
+		# with open ("aaa.jpg","wb") as f:
+		# 	f.write(test)
+
+		# print("Success!")
+		# print(response)
 
 		return response
 	
@@ -112,6 +126,9 @@ def lambda_handler(event, context):
 			"body": json.dumps({"error": "can't return image."})
 
 		}
+
+		print("Error has occured.")
+		print(response)
 
 		return response
 
@@ -155,4 +172,4 @@ def test():
 
 
 if __name__ == "__main__":
-	main()
+	test()
