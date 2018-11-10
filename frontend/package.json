@@ -13,8 +13,16 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.0.0"
+    "i": "^0.3.6",
+    "material-icons": "^0.2.3",
+    "node-sass": "^4.10.0",
+    "npm": "^6.4.1",
+    "nuxt": "^2.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "vuesax": "^3.7.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
