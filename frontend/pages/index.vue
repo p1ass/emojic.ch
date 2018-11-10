@@ -1,37 +1,63 @@
 <template>
   <section class="container">
-    <logo-title/>
-    <example-image/>
-    
-    <div class="buttons">
-      <vs-button 
-        type="relief" 
-        icon="arrow_upward"
-        size="large"
-        color="success"
-        class="button">顔文字に変換する！</vs-button>
-      <vs-button 
-        type="relief" 
-        icon="share"
-        size="large"
-        class="button">Twitterで共有する！</vs-button>
+    <image-card 
+      :src="top_image.src" 
+      :title="top_image.title" />
+
+    <action-buttons/>
+
+    <vs-button 
+      type="relief"
+      color="#e74c3c"
+      size="large"
+      icon="arrow_downward"
+      class="button">もっとほげを見てみる！</vs-button>
+
+
+    <div 
+      v-for="example in example_images" 
+      :key="example.title">
+      <image-card 
+        :src="example.src" 
+        :title="example.title" />
     </div>
+
+    <action-buttons/>
   </section>
 </template>
 
 <script>
-import LogoTitle from '~/components/LogoTitle'
-import ExampleImage from '~/components/ExampleImage'
+import ImageCard from '~/components/ImageCard'
+import ActionButtons from '~/components/ActionButtons'
 
 export default {
   components: {
-    LogoTitle,
-    ExampleImage
+    ImageCard,
+    ActionButtons
+  },
+
+  data() {
+    return {
+      top_image: {
+        src: '/images/yoshi.jpg',
+        title: 'ほげをふがにしちゃいます！'
+      },
+
+      example_images: [
+        { src: '/images/yoshi.jpg', title: 'ほげふが' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが' }
+      ]
+    }
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import '~/assets/styles/global.scss';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -40,14 +66,7 @@ export default {
   text-align: center;
 }
 
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: space-around;
-}
-
 .button {
-  margin: 10px 20px;
+  @include button;
 }
 </style>

@@ -1,20 +1,23 @@
 <template>
   <div class = "title">
-    タイトル
+    <h1>タイトル</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Title'
+  name: 'HeaderNav'
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .title {
   background-color: antiquewhite;
-  width: 100vw;
   height: 10vh;
   margin-bottom: 20px;
+
+  h1 {
+    font-weight: normal;
+  }
 }
 </style>
