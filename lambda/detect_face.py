@@ -99,11 +99,13 @@ def lambda_handler(event, context):
 		Image.fromarray(image.astype('uint8')).save(pasted_binary_image,"JPEG")
 
 		# レスポンスを作成
+		# CORS : https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
 		body = base64.b64encode(pasted_binary_image.getvalue()).decode('utf-8')
 		response = {
 			"statusCode": 200,
 			"headers" : {
 				"Content-Type": "'image/jpeg'",
+				"Access-Control-Allow-Origin": "http://localhost:3000"
 			},
 			"body" : body,
 			"isBase64Encoded": True

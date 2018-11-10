@@ -7,10 +7,10 @@
     <action-buttons/>
 
     <vs-button 
+      :icon-after="true" 
       type="relief"
-      color="#e74c3c"
+      color="success"
       size="large"
-      icon="arrow_downward"
       class="button">もっとほげを見てみる！</vs-button>
 
 

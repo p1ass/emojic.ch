@@ -28,3 +28,7 @@ cp image.jpg /path_to_face-to-emoji/inputs/
 ```
 python detect_face.py
 ```
+
+```
+curl -v --request POST -H "Accept: image/jpeg" -H "Content-Type: image/jpeg" --data-binary "@test.jpg" 'https://d65lnvm77i.execute-api.ap-northeast-1.amazonaws.com/dev' > sample.jpeg
+```

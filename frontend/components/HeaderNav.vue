@@ -1,7 +1,7 @@
 <template>
-  <div class = "title">
+  <header>
     <h1>タイトル</h1>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -11,13 +11,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  background-color: antiquewhite;
+header {
+  background-color: #27ae60;
   height: 10vh;
   margin-bottom: 20px;
+  border-bottom: 3px solid #ccc;
 
   h1 {
     font-weight: normal;
+    text-align: center;
   }
 }
 </style>
