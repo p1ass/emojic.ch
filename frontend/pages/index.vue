@@ -1,28 +1,38 @@
 <template>
   <section class="container">
-    <div class = "title">
-      タイトル
+    <logo-title/>
+    <example-image/>
+    
+    <div class="buttons">
+      <vs-button 
+        type="relief" 
+        icon="arrow_upward"
+        size="large"
+        color="success"
+        class="button">顔文字に変換する！</vs-button>
+      <vs-button 
+        type="relief" 
+        icon="share"
+        size="large"
+        class="button">Twitterで共有する！</vs-button>
     </div>
-    <vs-button 
-      type="relief" 
-      icon="arrow_upward"
-      size="large">顔文字に変換する！</vs-button>
   </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import LogoTitle from '~/components/LogoTitle'
+import ExampleImage from '~/components/ExampleImage'
 
 export default {
   components: {
-    Logo
+    LogoTitle,
+    ExampleImage
   }
 }
 </script>
 
 <style>
 .container {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,10 +40,14 @@ export default {
   text-align: center;
 }
 
-.title {
-  background-color: antiquewhite;
-  width: 600px;
-  height: 200px;
-  margin-bottom: 20px;
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.button {
+  margin: 10px 20px;
 }
 </style>
