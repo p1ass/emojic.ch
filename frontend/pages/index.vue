@@ -27,17 +27,18 @@
 <script>
 import ImageCard from '~/components/ImageCard'
 import ActionButtons from '~/components/ActionButtons'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     ImageCard,
     ActionButtons
   },
-
   data() {
     return {
       top_image: {
-        src: '/images/yoshi.jpg',
+        // 最初は直接叩かないと上手く行かない
+        src: this.$store.state.result.result_src,
         title: 'ほげをふがにしちゃいます！'
       },
 
@@ -50,7 +51,15 @@ export default {
     }
   },
 
-  methods: {}
+  computed: {
+    ...mapState('result', ['result_src'])
+  },
+
+  watch: {
+    result_src() {
+      this.top_image.src = this.result_src
+    }
+  }
 }
 </script>
 
