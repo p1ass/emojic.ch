@@ -67,7 +67,26 @@ export default {
       const file = await this.selectImage()
       this.openLoading()
       // API Gatewayにアップロードして変換後の画像を受け取る
-      await this.$store.dispatch('result/updateImageAction', file)
+      try {
+        await this.$store.dispatch('result/updateImageAction', file)
+      } catch (e) {
+        if (e.message.slice(0, 1) == '4') {
+          this.$vs.dialog({
+            color: 'danger',
+            title: `対応していない画像が選ばれました`,
+            text: 'えもじっくはPNG、JPEG形式の画像に対応しています。',
+            acceptText: '閉じる',
+            vsClose: () => {}
+          })
+        } else if (e.message.slice(0, 1) == '5') {
+          this.$vs.dialog({
+            color: 'danger',
+            title: `予期せぬエラーが発生しました。`,
+            text: 'しばらく経ってからもう一度お試しください。',
+            acceptText: '閉じる'
+          })
+        }
+      }
       this.closeLoading()
     },
 
