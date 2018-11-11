@@ -13,7 +13,7 @@ export default {
 <style lang="scss" scoped>
 header {
   background-color: #f9ca24;
-  height: 10vh;
+  height: 9vh;
   margin-bottom: 10px;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   display: flex;
