@@ -7,6 +7,8 @@ export default {
       return false
     }
 
+    console.log(file)
+
     const endpoint =
       'https://d65lnvm77i.execute-api.ap-northeast-1.amazonaws.com/dev/'
     const headers = { 'Content-Type': file.type, Accept: 'image/jpeg' }

@@ -35,13 +35,14 @@ export default {
 
 <style lang="scss" scoped>
 .cardx {
+  margin: 20px auto;
+  text-align: center;
   width: 90vw;
-  margin-bottom: 10px;
 }
 
 @media (min-width: 600px) {
   .cardx {
-    width: 600px;
+    width: 540px;
   }
 }
 

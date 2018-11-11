@@ -1,72 +1,74 @@
 <template>
-  <section class="container">
-    <image-card 
-      :src="top_image.src" 
-      :title="top_image.title" />
-
-    <action-buttons/>
-
-    <vs-button 
-      :icon-after="true" 
-      type="relief"
-      color="success"
-      size="large"
-      class="button">もっとほげを見てみる！</vs-button>
-
-
-    <div 
-      v-for="example in example_images" 
-      :key="example.title">
+  <div>
+    <div class="flex">
       <image-card 
-        :src="example.src" 
-        :title="example.title" />
+        :src="top_image.src" 
+        :title="top_image.title" />
     </div>
 
     <action-buttons/>
-  </section>
+
+    <div class="flex">
+      <div 
+        v-for="example in example_images" 
+        :key="example.title"
+      >
+        <image-card 
+          :src="example.src" 
+          :title="example.title"
+        />
+      </div>
+    </div>
+
+    <action-buttons/>
+  </div>
 </template>
 
 <script>
 import ImageCard from '~/components/ImageCard'
 import ActionButtons from '~/components/ActionButtons'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     ImageCard,
     ActionButtons
   },
-
   data() {
     return {
       top_image: {
-        src: '/images/yoshi.jpg',
+        // 最初は直接叩かないと上手く行かない
+        src: this.$store.state.result.result_src,
         title: 'ほげをふがにしちゃいます！'
       },
 
       example_images: [
-        { src: '/images/yoshi.jpg', title: 'ほげふが' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが' }
+        { src: '/images/yoshi.jpg', title: 'ほげふが1' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが2' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが3' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが4' }
       ]
+    }
+  },
+
+  computed: {
+    ...mapState('result', ['result_src'])
+  },
+
+  watch: {
+    result_src() {
+      this.top_image.src = this.result_src
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/styles/global.scss';
-
-.container {
+.flex {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
   align-items: center;
-  text-align: center;
-}
-
-.button {
-  @include button;
+  align-content: center;
 }
 </style>

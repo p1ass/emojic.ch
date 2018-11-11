@@ -12,14 +12,18 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  background-color: #27ae60;
-  height: 10vh;
-  margin-bottom: 20px;
-  border-bottom: 3px solid #ccc;
+  background-color: $main_color;
+  height: 9vh;
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   h1 {
     font-weight: normal;
     text-align: center;
+    color: white;
   }
 }
 </style>
