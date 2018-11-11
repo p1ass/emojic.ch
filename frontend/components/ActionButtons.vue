@@ -7,13 +7,15 @@
         size="large"
         color="#e74c3c"
         class="button"
-        @click="uploadImage">ふがに変換する！</vs-button>
+        @click="uploadImage">絵文字にしてみる！</vs-button>
       <vs-button 
         :icon-after="true" 
         type="relief"
         icon="share"
         size="large"
-        class="button">Twitterで共有する！</vs-button>
+        class="button"
+        href="http://twitter.com/share?url=https://emojic.ch&text=えもじっく&hashtags=えもじっく"
+        target="_blank">Twitterで共有する！</vs-button>
     </div>
     <a 
       v-show="converted_image != ''" 
