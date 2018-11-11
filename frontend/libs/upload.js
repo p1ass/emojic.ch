@@ -20,7 +20,7 @@ export default {
     if (res.status == 200) {
       // クォーテーション込の文字列になってしまってるので先頭と末尾の「'」を削除する
       return new Blob([res.data], {
-        type: res.headers['content-type'].slice(1).slice(0, -1)
+        type: res.headers['content-type']
       })
     }
     return res

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>タイトル</h1>
+    <h1>えもじっく</h1>
   </header>
 </template>
 

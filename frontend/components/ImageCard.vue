@@ -8,11 +8,15 @@
       </h3>
     </div>
     <div slot="media">
-      <img 
-        :src="src" 
-        class = "card-image"
-      >
-    </div>
+      <a 
+        :href="src" 
+        :src="src"
+        target="_blank">
+        <img 
+          :src="src"
+          class = "card-image"
+        >
+    </a></div>
     <div/>  
   </vs-card>
 </template>

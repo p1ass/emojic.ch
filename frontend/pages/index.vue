@@ -39,14 +39,13 @@ export default {
       top_image: {
         // 最初は直接叩かないと上手く行かない
         src: this.$store.state.result.result_src,
-        title: 'ほげをふがにしちゃいます！'
+        title: 'あなたの顔が絵文字😄に!?'
       },
 
       example_images: [
         { src: '/images/yoshi.jpg', title: 'ほげふが1' },
         { src: '/images/yoshi.jpg', title: 'ほげふが2' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが3' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが4' }
+        { src: '/images/yoshi.jpg', title: 'ほげふが3' }
       ]
     }
   },

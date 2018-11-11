@@ -104,8 +104,8 @@ def lambda_handler(event, context):
 		response = {
 			"statusCode": 200,
 			"headers" : {
-				"Content-Type": "'image/jpeg'",
-				"Access-Control-Allow-Origin": "http://localhost:3000"
+				"Content-Type": "image/jpeg",
+				"Access-Control-Allow-Origin": "https://emojic.ch"
 			},
 			"body" : body,
 			"isBase64Encoded": True
