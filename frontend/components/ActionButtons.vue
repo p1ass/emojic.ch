@@ -7,14 +7,14 @@
         size="large"
         color="#e74c3c"
         class="button"
-        @click="uploadImage">絵文字にしてみる！</vs-button>
+        @click="uploadImage">絵文字にしてみる😊</vs-button>
       <vs-button 
         :icon-after="true" 
         type="relief"
         icon="share"
         size="large"
         class="button"
-        href="http://twitter.com/share?url=https://emojic.ch&text=えもじっく&hashtags=えもじっく"
+        href="http://twitter.com/share?url=https://emojic.ch&text=こんな顔になりました😄&hashtags=えもじっく"
         target="_blank">Twitterで共有する！</vs-button>
     </div>
     <a 

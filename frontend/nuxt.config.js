@@ -7,11 +7,16 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'えもじっく',
+    title: 'えもじっく😋',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'えもじっくは写真から顔を認識し絵文字😄に変換するサービスです！絵文字は毎回ランダムに選ばれるのでドキドキ楽しめます！'
+      }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },

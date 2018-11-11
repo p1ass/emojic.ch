@@ -22,7 +22,8 @@ export default {
       return new Blob([res.data], {
         type: res.headers['content-type']
       })
+    } else {
+      throw new Error(res.status)
     }
-    return res
   }
 }

@@ -43,9 +43,9 @@ export default {
       },
 
       example_images: [
-        { src: '/images/yoshi.jpg', title: 'ほげふが1' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが2' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが3' }
+        { src: '/images/yoshi.jpg', title: '複数の顔も認識してくれます😁' },
+        { src: '/images/yoshi.jpg', title: '選ばれる絵文字はランダム😜' },
+        { src: '/images/yoshi.jpg', title: '横顔は認識しづらいよ😩' }
       ]
     }
   },

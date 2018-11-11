@@ -51,6 +51,7 @@ export default {
 }
 
 h3 {
+  font-size: 19px;
   font-weight: normal;
 }
 </style>
