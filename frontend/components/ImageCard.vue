@@ -35,14 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 .cardx {
-  width: 90vw;
-  margin-bottom: 10px;
-}
-
-@media (min-width: 600px) {
-  .cardx {
-    width: 600px;
-  }
+  margin: 20px 0;
 }
 
 h3 {

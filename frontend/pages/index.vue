@@ -1,29 +1,52 @@
 <template>
-  <section class="container">
-    <image-card 
-      :src="top_image.src" 
-      :title="top_image.title" />
+  <div>
+    <vs-row 
+      vs-type="flex" 
+      vs-justify="center"
+      class="container">
+
+      <vs-col 
+        vs-type="flex" 
+        vs-justify="center"
+        vs-align="center"
+        vs-w="4"
+        vs-sm="8"
+        vs-xs="11"
+      >
+        <image-card 
+          :src="top_image.src" 
+          :title="top_image.title" />
+      </vs-col>
+    </vs-row>
 
     <action-buttons/>
 
-    <vs-button 
-      :icon-after="true" 
-      type="relief"
-      color="success"
-      size="large"
-      class="button">もっとほげを見てみる！</vs-button>
+    <vs-row 
+      vs-type="flex" 
+      vs-justify="center"
+    >
+      <vs-col 
+        vs-type="flex" 
+        vs-justify="scenter"
+        vs-w="4"
+        vs-sm="8"
+        vs-xs="11"
+        class="examples"
+      >
+        <div 
+          v-for="example in example_images" 
+          :key="example.title">
 
+          <image-card 
+            :src="example.src" 
+            :title="example.title" />
+        </div>
+      </vs-col>
 
-    <div 
-      v-for="example in example_images" 
-      :key="example.title">
-      <image-card 
-        :src="example.src" 
-        :title="example.title" />
-    </div>
+    </vs-row>
 
     <action-buttons/>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -59,13 +82,13 @@ export default {
 @import '~/assets/styles/global.scss';
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  // flex-direction: column;
   text-align: center;
 }
 
+.examples {
+  flex-wrap: wrap;
+}
 .button {
   @include button;
 }
