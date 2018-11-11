@@ -1,35 +1,20 @@
 <template>
-  <vs-row 
-    vs-type="flex" 
-    vs-justify="center"
-    class="container">
-    <vs-col 
-      vs-type="flex" 
-      vs-justify="center"
-      vs-align="center"
-      vs-w="4"
-      vs-sm="8"
-      vs-xs="11"
-    >
-
-      <vs-card 
-        :actionable="true" 
-        class="cardx">
-        <div slot="header">
-          <h3>
-            {{ title }}
-          </h3>
-        </div>
-        <div slot="media">
-          <img 
-            :src="src" 
-            class = "card-image"
-          >
-        </div>
-        <div/>  
-      </vs-card>
-    </vs-col>
-  </vs-row>
+  <vs-card 
+    :actionable="true" 
+    class="cardx">
+    <div slot="header">
+      <h3>
+        {{ title }}
+      </h3>
+    </div>
+    <div slot="media">
+      <img 
+        :src="src" 
+        class = "card-image"
+      >
+    </div>
+    <div/>  
+  </vs-card>
 </template>
 
 <script>
@@ -50,9 +35,15 @@ export default {
 
 <style lang="scss" scoped>
 .cardx {
-  margin: 20px 0;
+  margin: 20px auto;
   text-align: center;
-  // width: 400px;
+  width: 90vw;
+}
+
+@media (min-width: 600px) {
+  .cardx {
+    width: 540px;
+  }
 }
 
 h3 {

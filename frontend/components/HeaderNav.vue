@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  background-color: #f9ca24;
+  background-color: $main_color;
   height: 9vh;
   margin-bottom: 10px;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);

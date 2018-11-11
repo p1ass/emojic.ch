@@ -1,18 +1,23 @@
 <template>
   <div>
-    <image-card 
-      :src="top_image.src" 
-      :title="top_image.title" />
+    <div class="flex">
+      <image-card 
+        :src="top_image.src" 
+        :title="top_image.title" />
+    </div>
 
     <action-buttons/>
 
-    <div 
-      v-for="example in example_images" 
-      :key="example.title">
-      <image-card 
-        :src="example.src" 
-        :title="example.title"
-      />
+    <div class="flex">
+      <div 
+        v-for="example in example_images" 
+        :key="example.title"
+      >
+        <image-card 
+          :src="example.src" 
+          :title="example.title"
+        />
+      </div>
     </div>
 
     <action-buttons/>
@@ -37,17 +42,24 @@ export default {
       },
 
       example_images: [
-        { src: '/images/yoshi.jpg', title: 'ほげふが' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが' }
+        { src: '/images/yoshi.jpg', title: 'ほげふが1' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが2' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが3' },
+        { src: '/images/yoshi.jpg', title: 'ほげふが4' }
       ]
     }
-  }
+  },
+
+  methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/styles/global.scss';
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+}
 </style>

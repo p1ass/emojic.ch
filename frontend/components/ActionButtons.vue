@@ -57,11 +57,24 @@ export default {
 
     async uploadImage() {
       const file = await this.selectImage()
-
+      this.openLoading()
       // API Gatewayにアップロードして変換後の画像を受け取る
       const binary_image = await UploadAPI.uploadImage(file)
       console.log(binary_image)
       this.converted_image = URL.createObjectURL(binary_image)
+      this.closeLoading()
+    },
+
+    openLoading() {
+      this.$vs.loading({
+        type: 'radius',
+        background: 'rgba(249, 202, 36, 0.8)',
+        color: 'rgb(255, 255, 255)'
+      })
+    },
+
+    closeLoading() {
+      this.$vs.loading.close()
     }
   }
 }

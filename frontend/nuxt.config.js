@@ -1,7 +1,7 @@
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
 
   /*
   ** Headers of the page
@@ -34,7 +34,7 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modules: [],
+  modules: [['nuxt-sass-resources-loader', ['@/assets/styles/global.scss']]],
 
   /*
   ** Build configuration
