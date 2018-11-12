@@ -15,8 +15,17 @@ module.exports = {
         hid: 'description',
         name: 'description',
         content:
-          'えもじっくは写真から顔を認識し絵文字😄に変換するサービスです！絵文字は毎回ランダムに選ばれるのでドキドキ楽しめます！'
-      }
+          'えもじっくは写真から顔を認識し絵文字😄に変換するサービスです！絵文字はランダムに選ばれるので毎回違った画像が楽しめます！'
+      },
+      { property: 'og:title', content: 'えもじっく😋' },
+      {
+        property: 'og:description',
+        content:
+          'えもじっくは写真から顔を認識し絵文字😄に変換するサービスです！絵文字はランダムに選ばれるので毎回違った画像が楽しめます！'
+      },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:image', content: '/images/multi_faces.jpg' },
+      { name: 'twitter:card', content: 'summary_large_image' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
