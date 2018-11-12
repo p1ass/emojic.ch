@@ -5,7 +5,7 @@
       
       <label class="button select-image vs-button vs-button-relief large">
         <div >
-          写真を選ぶ！
+          1. 写真を選ぶ！
           <input 
             id="file" 
             type="file" 
@@ -24,9 +24,9 @@
         size="large"
         color="#e74c3c"
         class="button"
-        @click="convertImage"
+        @click="startUploading"
       >
-        絵文字に変換😊
+        2. 絵文字に変換😊
       </vs-button>
 
       <vs-button 
@@ -36,17 +36,8 @@
         size="large"
         class="button"
         href="http://twitter.com/share?url=https://emojic.ch&text=こんな顔になりました😄&hashtags=えもじっく"
-        target="_blank">Twitterで共有する！</vs-button>
+        target="_blank">3. Twitterで共有する！</vs-button>
     </div>
-    <a 
-      v-show="converted_image != ''" 
-      :href = "converted_image" 
-      target="_blank">
-      <img 
-        :src="converted_image"
-        height="300px"
-        class="converted-image">
-    </a>
   </div>
 </template>
 
@@ -59,7 +50,6 @@ export default {
 
   data() {
     return {
-      converted_image: '',
       image: undefined
     }
   },
@@ -76,10 +66,6 @@ export default {
     }
   },
 
-  destroyed() {
-    revokeObjectURL(this.converted_image)
-  },
-
   methods: {
     setImage(e) {
       // inputからファイルを選ぶ
@@ -87,11 +73,28 @@ export default {
       this.image = e.target.files[0]
     },
 
-    convertImage() {
-      this.openLoading()
+    startUploading() {
+      // 画像が選ばれているか確認
+      if (this.image.type != 'image/jpeg' && this.image.type != 'image/png') {
+        this.$vs.dialog({
+          color: 'danger',
+          title: `対応していない画像が選ばれました`,
+          text: 'えもじっくはPNG、JPEG形式の画像に対応しています。',
+          acceptText: '閉じる'
+        })
+        return
+      }
+      try {
+        this.openLoading()
+        this.convertImage()
+      } catch (e) {
+        this.closeLoading()
+      }
+    },
 
-      // iPhoneの画像の向きを調整
-      // http://blog.yuhiisk.com/archive/2018/05/27/iphone-rotate-image-bug.html
+    // iPhoneの画像の向きを調整
+    // http://blog.yuhiisk.com/archive/2018/05/27/iphone-rotate-image-bug.html
+    convertImage() {
       new Promise((resolve, reject) => {
         loadImage.parseMetaData(this.image, data => {
           const options = {
@@ -116,9 +119,10 @@ export default {
         this.resizeImage(result)
       })
     },
+
+    // 画像のリサイズ
+    // https://www.bokukoko.info/entry/2016/03/28/JavaScript_で画像をリサイズする方法
     resizeImage(image) {
-      // 画像のリサイズ
-      // https://www.bokukoko.info/entry/2016/03/28/JavaScript_で画像をリサイズする方法
       const MIN_SIZE = 1000
       let canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')
@@ -156,32 +160,29 @@ export default {
     canvasToBlob(canvas) {
       // 必ずJPEGでBlobに変換する
       var type = 'image/jpeg'
-      // canvas から DataURL で画像を出力
+
       var dataurl = canvas.toDataURL(type)
-      // DataURL のデータ部分を抜き出し、Base64からバイナリに変換
       var bin = atob(dataurl.split(',')[1])
-      // 空の Uint8Array ビューを作る
       var buffer = new Uint8Array(bin.length)
-      // Uint8Array ビューに 1 バイトずつ値を埋める
       for (var i = 0; i < bin.length; i++) {
         buffer[i] = bin.charCodeAt(i)
       }
-      // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+
       return new Blob([buffer.buffer], { type: type })
     },
 
+    // API Gatewayにアップロードして変換後の画像を受け取る
     async uploadImage(blob) {
-      // API Gatewayにアップロードして変換後の画像を受け取る
       try {
         await this.$store.dispatch('result/updateImageAction', blob)
+        this.notifySuccess()
       } catch (e) {
         if (e.message.slice(0, 1) == '4') {
           this.$vs.dialog({
             color: 'danger',
             title: `対応していない画像が選ばれました`,
             text: 'えもじっくはPNG、JPEG形式の画像に対応しています。',
-            acceptText: '閉じる',
-            close: () => {}
+            acceptText: '閉じる'
           })
         } else if (e.message.slice(0, 1) == '5') {
           this.$vs.dialog({
@@ -193,6 +194,7 @@ export default {
         }
       }
       this.closeLoading()
+      this.image = undefined
     },
 
     openLoading() {
@@ -205,6 +207,16 @@ export default {
 
     closeLoading() {
       this.$vs.loading.close()
+    },
+
+    notifySuccess() {
+      this.$vs.notify({
+        title: '変換に成功しました',
+        text: '長押しで画像を保存してTwitterでつぶやこう！',
+        color: 'success',
+        position: 'top-right',
+        time: 3000
+      })
     }
   }
 }
@@ -226,8 +238,8 @@ export default {
 
 // inputボタンだけ独自にスタイルを設定
 .select-image {
-  background-color: green;
-  box-shadow: darken($color: green, $amount: 10) 0px 3px 0px 0px;
+  background-color: #059133;
+  box-shadow: darken($color: #059133, $amount: 10) 0px 3px 0px 0px;
   text-align: center;
   cursor: pointer;
 }
