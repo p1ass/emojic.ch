@@ -1,6 +1,5 @@
 <template>
   <vs-card 
-    :actionable="true" 
     :fixed-height="true"
     class="cardx">
     <div slot="header">
@@ -9,15 +8,11 @@
       </h3>
     </div>
     <div slot="media">
-      <a 
-        :href="src" 
+      <img 
         :src="src"
-        target="_blank">
-        <img 
-          :src="src"
-          class = "card-image"
-        >
-    </a></div>
+        class = "card-image"
+      >
+    </div>
     <div/>  
   </vs-card>
 </template>

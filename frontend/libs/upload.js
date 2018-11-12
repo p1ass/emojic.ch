@@ -1,5 +1,4 @@
 import axios from 'axios'
-
 export default {
   // Fileクラスで渡して、Blobで返す
   async uploadImage(file) {
@@ -26,7 +25,7 @@ export default {
 
     const endpoint =
       'https://d65lnvm77i.execute-api.ap-northeast-1.amazonaws.com/dev/'
-    const headers = { 'Content-Type': 'image/jpeg', Accept: 'image/jpeg' }
+    const headers = { 'Content-Type': file.type, Accept: 'image/jpeg' }
     const { data, error } = await axios.post(endpoint, file, {
       headers: headers,
       responseType: 'blob'
@@ -34,8 +33,6 @@ export default {
     if (error) {
       throw new Error(error.status)
     }
-
-    // クォーテーション込の文字列になってしまってるので先頭と末尾の「'」を削除する
     return data
   }
 }

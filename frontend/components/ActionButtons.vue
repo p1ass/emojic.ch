@@ -24,7 +24,7 @@
         size="large"
         color="#e74c3c"
         class="button"
-        @click="uploadImage"
+        @click="convertImage"
       >
         絵文字に変換😊
       </vs-button>
@@ -85,14 +85,76 @@ export default {
       // inputからファイルを選ぶ
       e.preventDefault()
       this.image = e.target.files[0]
-      console.log(file)
     },
 
-    async uploadImage() {
+    convertImage() {
       this.openLoading()
+
+      // 画像のリサイズ
+      // https://www.bokukoko.info/entry/2016/03/28/JavaScript_で画像をリサイズする方法
+      const MIN_SIZE = 1000
+      let canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+      const reader = new FileReader()
+      const vm = this
+      const type = this.image.type
+
+      reader.onload = function(e) {
+        let image = new Image()
+        image.src = e.target.result
+
+        image.crossOrigin = 'Anonymous'
+        image.onload = async function(event) {
+          let dstWidth, dstHeight
+          if (this.width > this.height) {
+            dstWidth = MIN_SIZE
+            dstHeight = (this.height * MIN_SIZE) / this.width
+          } else {
+            dstHeight = MIN_SIZE
+            dstWidth = (this.width * MIN_SIZE) / this.height
+          }
+          canvas.width = dstWidth
+          canvas.height = dstHeight
+          ctx.drawImage(
+            this,
+            0,
+            0,
+            this.width,
+            this.height,
+            0,
+            0,
+            dstWidth,
+            dstHeight
+          )
+
+          const blob = vm.canvasToBlob(canvas)
+          await vm.uploadImage(blob)
+        }
+      }
+      reader.readAsDataURL(this.image)
+    },
+
+    canvasToBlob(canvas) {
+      // 必ずJPEGでBlobに変換する
+      var type = 'image/jpeg'
+      // canvas から DataURL で画像を出力
+      var dataurl = canvas.toDataURL(type)
+      // DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+      var bin = atob(dataurl.split(',')[1])
+      // 空の Uint8Array ビューを作る
+      var buffer = new Uint8Array(bin.length)
+      // Uint8Array ビューに 1 バイトずつ値を埋める
+      for (var i = 0; i < bin.length; i++) {
+        buffer[i] = bin.charCodeAt(i)
+      }
+      // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+      return new Blob([buffer.buffer], { type: type })
+    },
+
+    async uploadImage(blob) {
       // API Gatewayにアップロードして変換後の画像を受け取る
       try {
-        await this.$store.dispatch('result/updateImageAction', this.image)
+        await this.$store.dispatch('result/updateImageAction', blob)
       } catch (e) {
         if (e.message.slice(0, 1) == '4') {
           this.$vs.dialog({
