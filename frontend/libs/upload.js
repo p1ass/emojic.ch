@@ -4,25 +4,38 @@ export default {
   // Fileクラスで渡して、Blobで返す
   async uploadImage(file) {
     if (file.type != 'image/jpeg' && file.type != 'image/png') {
-      return false
+      throw new Error('400')
     }
 
     console.log(file)
 
+    // エラーも一緒に返すようにする
+    // https://zukucode.com/2017/08/asynct-await-ajax-error.html
+    axios.interceptors.response.use(
+      response => {
+        return Promise.resolve({
+          data: response.data
+        })
+      },
+      error => {
+        return Promise.resolve({
+          error: error.response
+        })
+      }
+    )
+
     const endpoint =
       'https://d65lnvm77i.execute-api.ap-northeast-1.amazonaws.com/dev/'
-    const headers = { 'Content-Type': file.type, Accept: 'image/jpeg' }
-
-    const res = await axios.post(endpoint, file, {
+    const headers = { 'Content-Type': 'image/jpeg', Accept: 'image/jpeg' }
+    const { data, error } = await axios.post(endpoint, file, {
       headers: headers,
-      responseType: 'arraybuffer'
+      responseType: 'blob'
     })
-    if (res.status == 200) {
-      // クォーテーション込の文字列になってしまってるので先頭と末尾の「'」を削除する
-      return new Blob([res.data], {
-        type: res.headers['content-type'].slice(1).slice(0, -1)
-      })
+    if (error) {
+      throw new Error(error.status)
     }
-    return res
+
+    // クォーテーション込の文字列になってしまってるので先頭と末尾の「'」を削除する
+    return data
   }
 }

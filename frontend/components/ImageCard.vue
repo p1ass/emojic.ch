@@ -1,6 +1,7 @@
 <template>
   <vs-card 
     :actionable="true" 
+    :fixed-height="true"
     class="cardx">
     <div slot="header">
       <h3>
@@ -8,11 +9,15 @@
       </h3>
     </div>
     <div slot="media">
-      <img 
-        :src="src" 
-        class = "card-image"
-      >
-    </div>
+      <a 
+        :href="src" 
+        :src="src"
+        target="_blank">
+        <img 
+          :src="src"
+          class = "card-image"
+        >
+    </a></div>
     <div/>  
   </vs-card>
 </template>
@@ -47,6 +52,7 @@ export default {
 }
 
 h3 {
+  font-size: 19px;
   font-weight: normal;
 }
 </style>

@@ -5,7 +5,7 @@ import UploadAPI from '@/libs/upload'
 Vue.use(Vuex)
 
 export const state = () => ({
-  result_src: '/images/yoshi.jpg'
+  result_src: '/images/main.jpg'
 })
 
 export const mutations = {

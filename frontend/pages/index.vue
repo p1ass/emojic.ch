@@ -39,14 +39,16 @@ export default {
       top_image: {
         // 最初は直接叩かないと上手く行かない
         src: this.$store.state.result.result_src,
-        title: 'ほげをふがにしちゃいます！'
+        title: 'あなたの顔を絵文字😄に変換!?'
       },
 
       example_images: [
-        { src: '/images/yoshi.jpg', title: 'ほげふが1' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが2' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが3' },
-        { src: '/images/yoshi.jpg', title: 'ほげふが4' }
+        {
+          src: '/images/multi_faces.jpg',
+          title: '複数の顔も認識してくれます😁'
+        },
+        { src: '/images/random.jpg', title: '選ばれる絵文字はランダム😜' },
+        { src: '/images/yokogao.jpg', title: '横顔は認識しづらいよ😩' }
       ]
     }
   },
