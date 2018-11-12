@@ -105,7 +105,7 @@ def lambda_handler(event, context):
 			"statusCode": 200,
 			"headers" : {
 				"Content-Type": "image/jpeg",
-				"Access-Control-Allow-Origin": "http://localhost:3000"
+				"Access-Control-Allow-Origin": "*"
 			},
 			"body" : body,
 			"isBase64Encoded": True
@@ -127,7 +127,7 @@ def lambda_handler(event, context):
 			"statusCode" : 400,
 			"headers" : {
 				"Content-Type": "application/json",
-				"Access-Control-Allow-Origin": "http://localhost:3000"
+				"Access-Control-Allow-Origin": "*"
 			},
 
 			"body": json.dumps({"error": "can't return image."})

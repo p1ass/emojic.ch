@@ -1,6 +1,7 @@
 <template>
   <vs-card 
     :actionable="true" 
+    :fixed-height="true"
     class="cardx">
     <div slot="header">
       <h3>
