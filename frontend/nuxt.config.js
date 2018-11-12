@@ -27,7 +27,21 @@ module.exports = {
       { property: 'og:image', content: '/images/multi_faces.jpg' },
       { name: 'twitter:card', content: 'summary_large_image' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      {
+        rel: 'apple-touch-icon',
+        size: '180x180',
+        href: '/apple-touch-icon-152x152.png'
+      }
+    ],
+    link: [
+      {
+        rel: 'icon',
+        size: '152x152',
+        href: '/android-chrome-192x192.png'
+      }
+    ]
   },
 
   /*
