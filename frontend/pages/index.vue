@@ -8,6 +8,21 @@
 
     <action-buttons/>
 
+    <script 
+      async 
+      src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"/>
+    <!-- emojic -->
+    <ins 
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-4978327687969784"
+      data-ad-slot="3126638947"
+      data-ad-format="auto"
+      data-full-width-responsive="true"/>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
     <div class="flex">
       <div 
         v-for="example in example_images" 
@@ -49,6 +64,17 @@ export default {
         },
         { src: '/images/random.jpg', title: '選ばれる絵文字はランダム😜' },
         { src: '/images/yokogao.jpg', title: '横顔は認識しづらいよ😩' }
+      ]
+    }
+  },
+
+  head() {
+    return {
+      script: [
+        {
+          src:
+            'https://cdn.rawgit.com/blueimp/JavaScript-Load-Image/v2.6.2/js/load-image.all.min.js'
+        }
       ]
     }
   },
