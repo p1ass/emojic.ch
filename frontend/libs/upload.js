@@ -19,8 +19,7 @@ export default {
       }
     )
 
-    const endpoint =
-      'https://d65lnvm77i.execute-api.ap-northeast-1.amazonaws.com/dev/'
+    const endpoint = 'https://emojic.ch/upload'
     const headers = { 'Content-Type': file.type, Accept: 'image/jpeg' }
     const { data, error } = await axios.post(endpoint, file, {
       headers: headers,

@@ -16,19 +16,23 @@ export const mutations = {
 
 export const actions = {
   async updateImageAction({ commit }, file) {
-    const blob = await UploadAPI.uploadImage(file)
-    console.log(blob)
+    try {
+      const blob = await UploadAPI.uploadImage(file)
+      console.log(blob)
 
-    // Data URLを作成
-    new Promise((resolve, reject) => {
-      let reader = new FileReader()
-      reader.onload = event => {
-        resolve(event.target.result)
-      }
+      // Data URLを作成
+      new Promise((resolve, reject) => {
+        let reader = new FileReader()
+        reader.onload = event => {
+          resolve(event.target.result)
+        }
 
-      reader.readAsDataURL(blob)
-    }).then(result => {
-      commit('setResultSrc', result)
-    })
+        reader.readAsDataURL(blob)
+      }).then(result => {
+        commit('setResultSrc', result)
+      })
+    } catch (e) {
+      throw e
+    }
   }
 }
