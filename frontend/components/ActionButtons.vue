@@ -5,9 +5,8 @@
       
       <label class="button select-image vs-button vs-button-relief large">
         <div >
-          1. 写真を選ぶ！
+          1. 写真をえらぶ！
           <input 
-            id="file" 
             type="file" 
             accept="image/*"
             class=""
@@ -25,18 +24,15 @@
         color="#e74c3c"
         class="button"
         @click="startUploading"
-      >
-        2. 絵文字に変換😊
-      </vs-button>
+      >2. 絵文字に変換！</vs-button>
 
       <vs-button 
         :icon-after="true" 
         type="relief"
-        icon="share"
         size="large"
         class="button"
         href="http://twitter.com/share?url=https://emojic.ch&text=こんな顔になりました😄&hashtags=えもじっく"
-        target="_blank">3. Twitterで共有する！</vs-button>
+        target="_blank">3. Twitterで共有！</vs-button>
     </div>
   </div>
 </template>
@@ -194,7 +190,6 @@ export default {
         }
       }
       this.closeLoading()
-      this.image = undefined
     },
 
     openLoading() {
@@ -207,6 +202,7 @@ export default {
 
     closeLoading() {
       this.$vs.loading.close()
+      this.image = undefined
     },
 
     notifySuccess() {
