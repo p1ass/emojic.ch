@@ -2,10 +2,6 @@ import axios from 'axios'
 export default {
   // Fileクラスで渡して、Blobで返す
   async uploadImage(file) {
-    if (file.type != 'image/jpeg' && file.type != 'image/png') {
-      throw new Error('400')
-    }
-
     console.log(file)
 
     // エラーも一緒に返すようにする
