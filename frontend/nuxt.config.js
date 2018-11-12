@@ -48,8 +48,15 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modules: [['nuxt-sass-resources-loader', ['@/assets/styles/global.scss']]],
-
+  modules: [
+    ['nuxt-sass-resources-loader', ['@/assets/styles/global.scss']],
+    '@nuxtjs/pwa'
+  ],
+  manifest: {
+    name: 'えもじっく😋',
+    short_name: 'えもじっく',
+    lang: 'ja'
+  },
   /*
   ** Build configuration
   */

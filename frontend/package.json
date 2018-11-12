@@ -1,5 +1,5 @@
 {
-  "name": "front-end-face2emoji",
+  "name": "えもじっく😋",
   "version": "1.0.0",
   "description": "This is a front-end project for face2emoji.",
   "author": "Naoki Kishi",
@@ -13,6 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/pwa": "^2.6.0",
     "axios": "^0.18.0",
     "cross-env": "^5.2.0",
     "i": "^0.3.6",

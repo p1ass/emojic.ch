@@ -7,7 +7,6 @@
         <div >
           1. 写真をえらぶ！
           <input 
-            id="file" 
             type="file" 
             accept="image/*"
             class=""
