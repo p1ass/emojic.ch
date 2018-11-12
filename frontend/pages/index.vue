@@ -8,6 +8,21 @@
 
     <action-buttons/>
 
+    <script 
+      async 
+      src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"/>
+    <!-- emojic -->
+    <ins 
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-4978327687969784"
+      data-ad-slot="3126638947"
+      data-ad-format="auto"
+      data-full-width-responsive="true"/>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
     <div class="flex">
       <div 
         v-for="example in example_images" 
