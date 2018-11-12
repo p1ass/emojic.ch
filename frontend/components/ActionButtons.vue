@@ -90,6 +90,33 @@ export default {
     convertImage() {
       this.openLoading()
 
+      // iPhoneの画像の向きを調整
+      // http://blog.yuhiisk.com/archive/2018/05/27/iphone-rotate-image-bug.html
+      new Promise((resolve, reject) => {
+        loadImage.parseMetaData(this.image, data => {
+          const options = {
+            canvas: true
+          }
+          if (data.exif) {
+            options.orientation = data.exif.get('Orientation')
+          }
+          loadImage(
+            this.image,
+            canvas => {
+              var dataUri = canvas.toDataURL('image/jpeg')
+              // 画像を作成
+              let img = new Image()
+              img.src = dataUri
+              resolve(img)
+            },
+            options
+          )
+        })
+      }).then(result => {
+        this.resizeImage(result)
+      })
+    },
+    resizeImage(image) {
       // 画像のリサイズ
       // https://www.bokukoko.info/entry/2016/03/28/JavaScript_で画像をリサイズする方法
       const MIN_SIZE = 1000
@@ -97,41 +124,33 @@ export default {
       const ctx = canvas.getContext('2d')
       const reader = new FileReader()
       const vm = this
-      const type = this.image.type
 
-      reader.onload = function(e) {
-        let image = new Image()
-        image.src = e.target.result
-
-        image.crossOrigin = 'Anonymous'
-        image.onload = async function(event) {
-          let dstWidth, dstHeight
-          if (this.width > this.height) {
-            dstWidth = MIN_SIZE
-            dstHeight = (this.height * MIN_SIZE) / this.width
-          } else {
-            dstHeight = MIN_SIZE
-            dstWidth = (this.width * MIN_SIZE) / this.height
-          }
-          canvas.width = dstWidth
-          canvas.height = dstHeight
-          ctx.drawImage(
-            this,
-            0,
-            0,
-            this.width,
-            this.height,
-            0,
-            0,
-            dstWidth,
-            dstHeight
-          )
-
-          const blob = vm.canvasToBlob(canvas)
-          await vm.uploadImage(blob)
+      image.onload = async function(event) {
+        let dstWidth, dstHeight
+        if (this.width > this.height) {
+          dstWidth = MIN_SIZE
+          dstHeight = (this.height * MIN_SIZE) / this.width
+        } else {
+          dstHeight = MIN_SIZE
+          dstWidth = (this.width * MIN_SIZE) / this.height
         }
+        canvas.width = dstWidth
+        canvas.height = dstHeight
+        ctx.drawImage(
+          this,
+          0,
+          0,
+          this.width,
+          this.height,
+          0,
+          0,
+          dstWidth,
+          dstHeight
+        )
+
+        const blob = vm.canvasToBlob(canvas)
+        await vm.uploadImage(blob)
       }
-      reader.readAsDataURL(this.image)
     },
 
     canvasToBlob(canvas) {

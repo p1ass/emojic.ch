@@ -68,6 +68,17 @@ export default {
     }
   },
 
+  head() {
+    return {
+      script: [
+        {
+          src:
+            'https://cdn.rawgit.com/blueimp/JavaScript-Load-Image/v2.6.2/js/load-image.all.min.js'
+        }
+      ]
+    }
+  },
+
   computed: {
     ...mapState('result', ['result_src'])
   },
