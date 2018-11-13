@@ -26,7 +26,7 @@ module.exports = {
       { property: 'og:type', content: 'website' },
       {
         property: 'og:image',
-        content: 'https://emojic.ch/images/multi_faces.jpg'
+        content: 'https://emojic.ch/images/main.jpg'
       },
       { name: 'twitter:card', content: 'summary_large_image' }
     ],
