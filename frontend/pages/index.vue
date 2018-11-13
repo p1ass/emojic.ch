@@ -7,7 +7,24 @@
     </div>
 
     <action-buttons/>
-    <script src="//adm.shinobi.jp/s/f6872b8e65e9c91ca74d88b2b620bcde"/>
+
+    <!-- admax -->
+    <div class="flex ad">
+      <!-- admax -->
+      <div 
+        class="admax-switch" 
+        data-admax-id="cfb331b4c77e13981a1eaa3ee499f3d3" 
+        style="display:inline-block;"/>
+      <script type="text/javascript">(admaxads = window.admaxads || []).push({admax_id: "cfb331b4c77e13981a1eaa3ee499f3d3", type: "switch"});</script>
+      <script 
+        type="text/javascript" 
+        charset="utf-8" 
+        src="//adm.shinobi.jp/st/t.js" 
+        async/>
+        <!-- admax -->
+    </div>
+    <!-- admax -->
+
     <div class="flex">
       <div 
         v-for="example in example_images" 
@@ -21,7 +38,20 @@
     </div>
 
     <action-buttons/>
-    <script src="//adm.shinobi.jp/s/f6872b8e65e9c91ca74d88b2b620bcde"/>
+    <!-- admax -->
+    <div class="flex ad">
+      <div 
+        class="admax-switch" 
+        data-admax-id="62ffd20c34051861edc5b68c6a4dca84" 
+        style="display:inline-block;"/>
+      <script type="text/javascript">(admaxads = window.admaxads || []).push({admax_id: "62ffd20c34051861edc5b68c6a4dca84", type: "switch"});</script>
+      <script 
+        type="text/javascript" 
+        charset="utf-8" 
+        src="//adm.shinobi.jp/st/t.js" 
+        async/>
+    </div>
+    <!-- admax -->
   </div>
 </template>
 
@@ -84,5 +114,9 @@ export default {
   justify-content: space-around;
   align-items: center;
   align-content: center;
+}
+
+.ad {
+  margin: 10px 0;
 }
 </style>
