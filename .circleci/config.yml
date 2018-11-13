@@ -21,20 +21,29 @@ jobs:
 
       - save_cache:
           paths:
-            - node_modules
+            - frontend/node_modules
           key: v1-dependencies-{{ checksum "frontend/package.json" }}
+
+      - persist_to_workspace:
+          root: . 
+          paths:
+            - . 
 
   deploy:
     docker:
-      - image: innovatorjapan/awscli:latest
+      - image: circleci/node:7.10
 
     steps:
       - checkout
+
+      - attach_workspace: # workspaceをアタッチする
+          at: .
 
       - run:
           name: Deploy to S3 
           command: |
             cd frontend
+            mkdir -p dist
             ./deploy_to_s3.sh
 
 workflows:
