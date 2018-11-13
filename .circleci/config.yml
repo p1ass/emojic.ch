@@ -1,0 +1,50 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "frontend/package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: 
+          name: Install Package
+          command: |
+            cd frontend
+            npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "frontend/package.json" }}
+
+  deploy:
+    docker:
+      - image: innovatorjapan/awscli:latest
+
+    steps:
+      - checkout
+
+      - run:
+          name: Deploy to S3 
+          command: |
+            cd frontend
+            ./deploy_to_s3.sh
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy: # deployはbuildのあとに実行
+          requires:
+            - build
+          filters: # developブランチの場合のみデプロイする
+            branches:
+              only: master

@@ -7,9 +7,9 @@
         <div >
           1. 写真をえらぶ！
           <input 
-            type="file" 
+            :value="filePpath"
+            type="file"
             accept="image/*"
-            class=""
             @change="setImage"
           >
         </div>
@@ -31,7 +31,7 @@
         type="relief"
         size="large"
         class="button"
-        href="http://twitter.com/share?url=https://emojic.ch&text=こんな顔になりました😄&hashtags=えもじっく"
+        href="http://twitter.com/share?url=https://emojic.ch&hashtags=えもじっく"
         target="_blank">3. Twitterで共有！</vs-button>
     </div>
   </div>
@@ -46,25 +46,29 @@ export default {
 
   data() {
     return {
-      image: undefined
+      image: undefined,
+      isSelected: false,
+      filePpath: ''
     }
   },
-
   computed: {
-    ...mapActions('result', ['updateImageAction']),
+    ...mapActions('result', ['updateImageAction'])
+  },
 
-    isSelected() {
+  watch: {
+    image() {
       if (this.image == undefined) {
-        return false
+        this.isSelected = false
       } else {
-        return true
+        this.isSelected = true
       }
     }
   },
 
   methods: {
+    // inputからファイルを選ぶ
     setImage(e) {
-      // inputからファイルを選ぶ
+      this.filePath = ''
       e.preventDefault()
       this.image = e.target.files[0]
     },
@@ -211,7 +215,7 @@ export default {
         text: '長押しで画像を保存してTwitterでつぶやこう！',
         color: 'success',
         position: 'top-right',
-        time: 3000
+        time: 4000
       })
     }
   }

@@ -7,7 +7,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'えもじっく😋',
+    title: 'えもじっく😋 | 顔認識で人の顔を絵文字にします',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -26,22 +26,21 @@ module.exports = {
       { property: 'og:type', content: 'website' },
       {
         property: 'og:image',
-        content: 'https://emojic.ch/images/multi_faces.jpg'
+        content: 'https://emojic.ch/images/main.jpg'
       },
       { name: 'twitter:card', content: 'summary_large_image' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     link: [
+      { rel: 'icon', href: '/favicon.ico' },
       {
         rel: 'apple-touch-icon',
-        size: '180x180',
+        sizes: '152x152',
         href: '/apple-touch-icon-152x152.png'
-      }
-    ],
-    link: [
+      },
       {
         rel: 'icon',
-        size: '152x152',
+        sizes: '192x192',
+        type: 'image/png',
         href: '/android-chrome-192x192.png'
       }
     ]
