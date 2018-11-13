@@ -80,6 +80,4 @@ dist
 # IDE
 .idea
 
-deploy_to_s3.sh
-
 sw.*
