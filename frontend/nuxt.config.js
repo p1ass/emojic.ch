@@ -16,19 +16,7 @@ module.exports = {
         name: 'description',
         content:
           'えもじっくは写真から顔を認識し絵文字😄に変換するサービスです！絵文字はランダムに選ばれるので毎回違った画像が楽しめます！'
-      },
-      { property: 'og:title', content: 'えもじっく😋' },
-      {
-        property: 'og:description',
-        content:
-          'えもじっくは写真から顔を認識し絵文字😄に変換するサービスです！絵文字はランダムに選ばれるので毎回違った画像が楽しめます！'
-      },
-      { property: 'og:type', content: 'website' },
-      {
-        property: 'og:image',
-        content: 'https://emojic.ch/images/main.jpg'
-      },
-      { name: 'twitter:card', content: 'summary_large_image' }
+      }
     ],
     link: [
       { rel: 'icon', href: '/favicon.ico' },
