@@ -5,9 +5,9 @@
         :src="top_image.src" 
         :title="top_image.title" />
     </div>
-
     <action-buttons/>
-
+    <p class="flex attention">サーバーに画像を保存しません！</p>
+    <p class="flex attention">画像は長押しで保存してね！</p>
     <!-- admax -->
     <div class="flex ad">
       <!-- admax -->
@@ -20,8 +20,8 @@
         type="text/javascript" 
         charset="utf-8" 
         src="//adm.shinobi.jp/st/t.js" 
-        async/>
-        <!-- admax -->
+      />
+      <!-- admax -->
     </div>
     <!-- admax -->
 
@@ -49,7 +49,7 @@
         type="text/javascript" 
         charset="utf-8" 
         src="//adm.shinobi.jp/st/t.js" 
-        async/>
+      />
     </div>
     <!-- admax -->
   </div>
@@ -118,5 +118,9 @@ export default {
 
 .ad {
   margin: 10px 0;
+}
+
+.attention {
+  color: rgb(130, 130, 130);
 }
 </style>
