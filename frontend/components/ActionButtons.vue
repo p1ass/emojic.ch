@@ -1,11 +1,9 @@
 <template>
   <div>
-
     <div class="buttons">
-      
       <label class="button select-image vs-button vs-button-relief large">
         <div >
-          1. 写真をえらぶ！
+          写真をえらぶ！
           <input 
             :value="filePpath"
             type="file"
@@ -24,15 +22,14 @@
         color="#e74c3c"
         class="button"
         @click="startUploading"
-      >2. 絵文字に変換！</vs-button>
+      >絵文字に変換！</vs-button>
 
       <vs-button 
         :icon-after="true" 
         type="relief"
         size="large"
         class="button"
-        href="http://twitter.com/share?url=https://emojic.ch&hashtags=えもじっく"
-        target="_blank">3. Twitterで共有！</vs-button>
+        @click="openTwitter">Twitterを開く！</vs-button>
     </div>
   </div>
 </template>
@@ -66,8 +63,14 @@ export default {
   },
 
   methods: {
+    openTwitter() {
+      window.open(
+        'https://twitter.com/intent/tweet?url=https://emojic.ch&hashtags=えもじっく'
+      )
+    },
     // inputからファイルを選ぶ
     setImage(e) {
+      this.notifySelect()
       this.filePath = ''
       e.preventDefault()
       this.image = e.target.files[0]
@@ -177,7 +180,9 @@ export default {
         await this.$store.dispatch('result/updateImageAction', blob)
         this.notifySuccess()
       } catch (e) {
-        if (e.message.slice(0, 1) == '4') {
+        if (e.message == 204) {
+          this.notifyFailed()
+        } else if (e.message.slice(0, 1) == '4') {
           this.$vs.dialog({
             color: 'danger',
             title: `対応していない画像が選ばれました`,
@@ -216,6 +221,25 @@ export default {
         color: 'success',
         position: 'top-right',
         time: 4000
+      })
+    },
+    notifyFailed() {
+      this.$vs.notify({
+        title: '顔を認識できませんでした',
+        text: '別の画像を選んでみよう！',
+        color: 'warning',
+        position: 'top-right',
+        time: 4000
+      })
+    },
+
+    notifySelect() {
+      this.$vs.notify({
+        title: '画像を選択しました',
+        text: 'さっそく絵文字に変換してみよう',
+        color: 'success',
+        position: 'top-right',
+        time: 3000
       })
     }
   }

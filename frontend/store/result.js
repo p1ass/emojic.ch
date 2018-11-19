@@ -18,7 +18,6 @@ export const actions = {
   async updateImageAction({ commit }, file) {
     try {
       const blob = await UploadAPI.uploadImage(file)
-      console.log(blob)
 
       // Data URLを作成
       new Promise((resolve, reject) => {
