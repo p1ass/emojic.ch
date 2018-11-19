@@ -49,6 +49,8 @@ jobs:
             cd frontend
             mkdir -p dist
             ./deploy_to_s3.sh
+            cd ../lambda
+            ./deploy_to_lambda.sh
 
 workflows:
   version: 2
