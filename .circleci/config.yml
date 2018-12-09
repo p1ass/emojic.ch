@@ -15,7 +15,7 @@ jobs:
                   name: Install Package
                   command: |
                       cd frontend
-                      npm install
+                      yarn
             - save_cache:
                   paths:
                       - frontend/node_modules
@@ -25,7 +25,7 @@ jobs:
                   name: Build
                   command: |
                       cd frontend
-                      npm run generate
+                      yarn run generate
             - persist_to_workspace:
                   root: .
                   paths:
