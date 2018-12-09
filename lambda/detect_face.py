@@ -81,7 +81,6 @@ def pasteEmoji(image,face):
 def lambda_handler(event, context):
 
 	# 送られてきたデータから画像ファイルを取得
-	# multipart/form-dataのfileキーの画像を取得する
 	try:
 		binary_image = base64.b64decode(event["body"])
 		image = convertBinaryToImage(binary_image)
@@ -116,14 +115,6 @@ def lambda_handler(event, context):
 			"isBase64Encoded": True
 		}
 
-		# 出力確認用
-		# test = base64.b64decode(body)
-		# with open ("aaa.jpg","wb") as f:
-		# 	f.write(test)
-
-		# print("Success!")
-		# print(response)
-
 		return response
 	
 	except Exception as e:
@@ -151,7 +142,15 @@ def test():
 		img_binary = f.read()
 
 		event = {"body":base64.b64encode(img_binary)}
-		lambda_handler(event,{})
+		response = lambda_handler(event,{})
+
+		# 出力確認用
+		test = base64.b64decode(response["body"])
+		with open ("output.jpg","wb") as f:
+			f.write(test)
+
+		print("Success!")
+		print(response)
 
 
 if __name__ == "__main__":
