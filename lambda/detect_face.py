@@ -6,6 +6,7 @@ from PIL import Image
 import base64
 import json
 import random
+import os
 
 # 参考 : https://qiita.com/akitsukada/items/e6d8fe68c49973d1edf6
 # 参考 : http://blog.pchw.io/xentry/2018/04/12/094351
@@ -109,7 +110,7 @@ def lambda_handler(event, context):
 			"statusCode": status,
 			"headers" : {
 				"Content-Type": "image/jpeg",
-				"Access-Control-Allow-Origin": "*"
+				"Access-Control-Allow-Origin": os.environ["EMOJIC_ORIGIN"]
 			},
 			"body" : body,
 			"isBase64Encoded": True
@@ -123,7 +124,7 @@ def lambda_handler(event, context):
 			"statusCode" : 400,
 			"headers" : {
 				"Content-Type": "application/json",
-				"Access-Control-Allow-Origin": "*"
+				"Access-Control-Allow-Origin": os.environ["EMOJIC_ORIGIN"]
 			},
 
 			"body": json.dumps({"error": "can't return image."})
