@@ -1,65 +1,60 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/node:8.12
+    build:
+        docker:
+            - image: circleci/node:8.12
 
-    steps:
-      - checkout
+        steps:
+            - checkout
 
-      - restore_cache:
-          keys:
-          - v1-{{ checksum "frontend/package.json" }}
+            - restore_cache:
+                  keys:
+                      - v1-{{ checksum "frontend/package.json" }}
 
-      - run: 
-          name: Install Package
-          command: |
-            cd frontend
-            npm install
+            - run:
+                  name: Install Package
+                  command: |
+                      cd frontend
+                      yarn
+            - save_cache:
+                  paths:
+                      - frontend/node_modules
+                  key: v1-{{ checksum "frontend/package.json" }}
 
-      - save_cache:
-          paths:
-            - frontend/node_modules
-          key: v1-{{ checksum "frontend/package.json" }}
+            - run:
+                  name: Build
+                  command: |
+                      cd frontend
+                      yarn run generate
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
 
-      - run:
-          name: Build
-          command: |
-            cd frontend
-            npm run generate
+    deploy:
+        docker:
+            - image: cdssnc/aws-cli
 
-      - persist_to_workspace:
-          root: . 
-          paths:
-            - . 
+        steps:
+            - checkout
 
-  deploy:
-    docker:
-      - image: cdssnc/aws-cli
+            - attach_workspace: # workspaceをアタッチする
+                  at: .
 
-    steps:
-      - checkout
-
-      - attach_workspace: # workspaceをアタッチする
-          at: .
-
-      - run:
-          name: Deploy to S3 
-          command: |
-            cd frontend
-            mkdir -p dist
-            ./deploy_to_s3.sh
-            cd ../lambda
-            ./deploy_to_lambda.sh
-
+            - run:
+                  name: Deploy to S3
+                  command: |
+                      cd frontend
+                      mkdir -p dist
+                      ./deploy_to_s3.sh
 workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-      - deploy: # deployはbuildのあとに実行
-          requires:
+    version: 2
+    build-deploy:
+        jobs:
             - build
-          filters: # developブランチの場合のみデプロイする
-            branches:
-              only: master
+            - deploy: # deployはbuildのあとに実行
+                  requires:
+                      - build
+                  filters: # developブランチの場合のみデプロイする
+                      branches:
+                          only: master
