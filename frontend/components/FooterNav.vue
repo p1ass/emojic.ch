@@ -16,7 +16,7 @@ export default {
 footer {
   background-color: $main_color;
   height: 60px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
