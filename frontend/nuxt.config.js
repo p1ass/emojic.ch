@@ -58,7 +58,13 @@ module.exports = {
   */
   modules: [
     ['nuxt-sass-resources-loader', ['@/assets/styles/global.scss']],
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-127036212-3'
+      }
+    ]
   ],
   manifest: {
     name: 'えもじっく😋',
