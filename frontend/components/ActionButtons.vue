@@ -36,6 +36,7 @@
 
 <script>
 import UploadAPI from '@/libs/upload'
+import ImageUtil from '@/libs/image'
 import { mapActions } from 'vuex'
 
 export default {
@@ -76,7 +77,7 @@ export default {
       this.image = e.target.files[0]
     },
 
-    startUploading() {
+    async startUploading() {
       // 画像が選ばれているか確認
       if (this.image.type != 'image/jpeg' && this.image.type != 'image/png') {
         this.$vs.dialog({
@@ -85,93 +86,20 @@ export default {
           text: 'えもじっくはPNG、JPEG形式の画像に対応しています。',
           acceptText: '閉じる'
         })
-        return
+        return null
       }
+
       try {
         this.openLoading()
-        this.convertImage()
+
+        const fixed_image = await ImageUtil.fixImageOrientation(this.image)
+        const blob_image = await ImageUtil.resizeImage(fixed_image)
+        await this.uploadImage(blob_image)
       } catch (e) {
+        this.dialogUnExpectedError()
+      } finally {
         this.closeLoading()
       }
-    },
-
-    // iPhoneの画像の向きを調整
-    // http://blog.yuhiisk.com/archive/2018/05/27/iphone-rotate-image-bug.html
-    convertImage() {
-      new Promise((resolve, reject) => {
-        loadImage.parseMetaData(this.image, data => {
-          const options = {
-            canvas: true
-          }
-          if (data.exif) {
-            options.orientation = data.exif.get('Orientation')
-          }
-          loadImage(
-            this.image,
-            canvas => {
-              var dataUri = canvas.toDataURL('image/jpeg')
-              // 画像を作成
-              let img = new Image()
-              img.src = dataUri
-              resolve(img)
-            },
-            options
-          )
-        })
-      }).then(result => {
-        this.resizeImage(result)
-      })
-    },
-
-    // 画像のリサイズ
-    // https://www.bokukoko.info/entry/2016/03/28/JavaScript_で画像をリサイズする方法
-    resizeImage(image) {
-      const MIN_SIZE = 1000
-      let canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
-      const reader = new FileReader()
-      const vm = this
-
-      image.onload = async function(event) {
-        let dstWidth, dstHeight
-        if (this.width > this.height) {
-          dstWidth = MIN_SIZE
-          dstHeight = (this.height * MIN_SIZE) / this.width
-        } else {
-          dstHeight = MIN_SIZE
-          dstWidth = (this.width * MIN_SIZE) / this.height
-        }
-        canvas.width = dstWidth
-        canvas.height = dstHeight
-        ctx.drawImage(
-          this,
-          0,
-          0,
-          this.width,
-          this.height,
-          0,
-          0,
-          dstWidth,
-          dstHeight
-        )
-
-        const blob = vm.canvasToBlob(canvas)
-        await vm.uploadImage(blob)
-      }
-    },
-
-    canvasToBlob(canvas) {
-      // 必ずJPEGでBlobに変換する
-      var type = 'image/jpeg'
-
-      var dataurl = canvas.toDataURL(type)
-      var bin = atob(dataurl.split(',')[1])
-      var buffer = new Uint8Array(bin.length)
-      for (var i = 0; i < bin.length; i++) {
-        buffer[i] = bin.charCodeAt(i)
-      }
-
-      return new Blob([buffer.buffer], { type: type })
     },
 
     // API Gatewayにアップロードして変換後の画像を受け取る
@@ -182,23 +110,12 @@ export default {
       } catch (e) {
         if (e.message == 204) {
           this.notifyFailed()
-        } else if (e.message.slice(0, 1) == '4') {
-          this.$vs.dialog({
-            color: 'danger',
-            title: `対応していない画像が選ばれました`,
-            text: 'えもじっくはPNG、JPEG形式の画像に対応しています。',
-            acceptText: '閉じる'
-          })
-        } else if (e.message.slice(0, 1) == '5') {
-          this.$vs.dialog({
-            color: 'danger',
-            title: `予期せぬエラーが発生しました。`,
-            text: 'しばらく経ってからもう一度お試しください。',
-            acceptText: '閉じる'
-          })
+        } else if (400 <= e.message <= 499) {
+          this.dialogUnSpoortError()
+        } else {
+          this.dialogUnExpectedError()
         }
       }
-      this.closeLoading()
     },
 
     openLoading() {
@@ -240,6 +157,23 @@ export default {
         color: 'success',
         position: 'top-right',
         time: 3000
+      })
+    },
+
+    dialogUnSpoortError() {
+      this.$vs.dialog({
+        color: 'danger',
+        title: `対応していない画像が選ばれました`,
+        text: 'えもじっくはPNG、JPEG形式の画像に対応しています。',
+        acceptText: '閉じる'
+      })
+    },
+    dialogUnExpectedError() {
+      this.$vs.dialog({
+        color: 'danger',
+        title: `予期せぬエラーが発生しました。`,
+        text: 'しばらく経ってからもう一度お試しください。',
+        acceptText: '閉じる'
       })
     }
   }
