@@ -8,22 +8,21 @@
     <action-buttons/>
     <p class="flex attention">サーバーに画像を保存しません！</p>
     <p class="flex attention">画像は長押しで保存してね！</p>
-    <!-- admax -->
     <div class="flex ad">
       <!-- admax -->
       <div 
-        class="admax-switch" 
-        data-admax-id="cfb331b4c77e13981a1eaa3ee499f3d3" 
-        style="display:inline-block;"/>
-      <script type="text/javascript">(admaxads = window.admaxads || []).push({admax_id: "cfb331b4c77e13981a1eaa3ee499f3d3", type: "switch"});</script>
+        v-if="is_mobile"
+        class="admax-ads" 
+        data-admax-id="0583263027895ecbac9c67f7788a5a74" 
+        style="display:inline-block;width:320px;height:50px;"/>
+      <script type="text/javascript">(admaxads = window.admaxads || []).push({admax_id: "0583263027895ecbac9c67f7788a5a74", type: "banner"});</script>
       <script 
         type="text/javascript" 
         charset="utf-8" 
         src="//adm.shinobi.jp/st/t.js" 
-      />
-      <!-- admax -->
+        async/>
+        <!-- admax -->
     </div>
-    <!-- admax -->
 
     <div class="flex">
       <div 
@@ -59,7 +58,7 @@
 import ImageCard from '~/components/ImageCard'
 import ActionButtons from '~/components/ActionButtons'
 import { mapState } from 'vuex'
-
+import isMobile from 'ismobilejs'
 export default {
   components: {
     ImageCard,
@@ -80,7 +79,8 @@ export default {
         },
         { src: '/images/random.jpg', title: '選ばれる絵文字はランダム😜' },
         { src: '/images/yokogao.jpg', title: '横顔は認識しづらいよ😩' }
-      ]
+      ],
+      is_mobile: isMobile.any
     }
   },
 
