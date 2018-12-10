@@ -38,6 +38,7 @@
 import UploadAPI from '@/libs/upload'
 import ImageUtil from '@/libs/image'
 import { mapActions } from 'vuex'
+import isMobile from 'ismobilejs'
 
 export default {
   name: 'Buttons',
@@ -65,10 +66,13 @@ export default {
 
   methods: {
     openTwitter() {
-      window.open(
-        'https://twitter.com/intent/tweet?url=https://emojic.ch&hashtags=えもじっく'
-      )
+      if (isMobile.any == true) {
+        window.open('https://twitter.com/intent/tweet?hashtags=えもじっく')
+      } else {
+        window.open('https://twitter.com/')
+      }
     },
+
     // inputからファイルを選ぶ
     setImage(e) {
       this.notifySelect()
@@ -102,7 +106,6 @@ export default {
       }
     },
 
-    // API Gatewayにアップロードして変換後の画像を受け取る
     async uploadImage(blob) {
       try {
         await this.$store.dispatch('result/updateImageAction', blob)
