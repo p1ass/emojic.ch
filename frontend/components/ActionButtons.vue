@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="buttons">
-      <label class="button select-image vs-button vs-button-relief large">
+      <label class="button select-image vs-component vs-button button vs-button-null vs-button-relief large">
         <div >
           写真をえらぶ！
           <input 
@@ -19,7 +19,7 @@
         :disabled="!isSelected"
         type="relief"
         size="large"
-        color="#e74c3c"
+        color="#ff6348"
         class="button"
         @click="startUploading"
       >絵文字に変換！</vs-button>
@@ -29,6 +29,7 @@
         type="relief"
         size="large"
         class="button"
+        color="#1e90ff"
         @click="openTwitter">Twitterを開く！</vs-button>
     </div>
   </div>
@@ -106,6 +107,7 @@ export default {
       }
     },
 
+    // API Gatewayにアップロードして変換後の画像を受け取る
     async uploadImage(blob) {
       try {
         await this.$store.dispatch('result/updateImageAction', blob)
@@ -199,8 +201,9 @@ export default {
 
 // inputボタンだけ独自にスタイルを設定
 .select-image {
-  background-color: #059133;
-  box-shadow: darken($color: #059133, $amount: 10) 0px 3px 0px 0px;
+  $button-color: #27ae60;
+  background-color: $button-color;
+  box-shadow: darken($color: $button-color, $amount: 10) 0px 3px 0px 0px;
   text-align: center;
   cursor: pointer;
 }

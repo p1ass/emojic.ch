@@ -1,6 +1,7 @@
-@mixin button(){
-	margin: 10px 20px;
-	width: 250px;
+@mixin button() {
+  margin: 10px 20px;
+  width: 250px;
+  user-select: none;
 }
 
-$main_color: rgba(249, 202, 36, 1);
+$main_color: rgb(255, 213, 62);
