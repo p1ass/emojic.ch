@@ -61,7 +61,7 @@ jobs:
                   name: Deploy lambda function
                   command: |
                       cd lambda
-                      npm install -g serverless
+                      sudo npm install -g serverless
                       npm install --save serverless-python-requirements serverless-prune-plugin
                       serverless deploy -v
 workflows:
