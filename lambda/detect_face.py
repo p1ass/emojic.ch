@@ -6,6 +6,7 @@ import base64
 import json
 import random
 import os
+import sys
 from typing import List
 
 """
@@ -132,6 +133,7 @@ def lambda_handler(event, context):
             "isBase64Encoded": True
         }
 
+        print(response)
         return response
 
     except Exception as e:
@@ -153,9 +155,9 @@ def lambda_handler(event, context):
         return response
 
 
-def test():
+def test(input_file):
 
-    with open("test.jpg", "rb") as f:
+    with open(input_file, "rb") as f:
         img_binary = f.read()
 
         event = {"body": base64.b64encode(img_binary)}
@@ -171,4 +173,4 @@ def test():
 
 
 if __name__ == "__main__":
-    test()
+    test(sys.argv[1])
