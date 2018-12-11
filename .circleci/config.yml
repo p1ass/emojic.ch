@@ -74,7 +74,9 @@ jobs:
 
             - run:
                   name: Deploy lambda function
-                  command: serverless deploy -v
+                  command: |
+                      cd lambda
+                      serverless deploy -v
 
 workflows:
     version: 2
