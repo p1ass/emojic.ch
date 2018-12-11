@@ -1,22 +1,15 @@
-# front-end-face2emoji
+# [えもじっく](https://emojic.ch) フロントエンド
 
-> This is a front-end project for face2emoji.
-
-## Build Setup
+## Start Project
 
 ``` bash
-# install dependencies
 $ yarn install
 
-# serve with hot reload at localhost:3000
 $ yarn run dev
-
-# build for production and launch server
-$ yarn run build
-$ yarn start
-
-# generate static project
-$ yarn run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+### Generate Deploy files
+
+```bash
+$ yarn run generate
+```
