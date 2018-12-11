@@ -16,6 +16,7 @@ jobs:
                   command: |
                       cd frontend
                       yarn
+
             - save_cache:
                   paths:
                       - frontend/node_modules
@@ -26,35 +27,73 @@ jobs:
                   command: |
                       cd frontend
                       yarn run generate
+
             - persist_to_workspace:
                   root: .
                   paths:
                       - .
 
-    deploy:
+    deploy-frontend:
         docker:
             - image: cdssnc/aws-cli
 
         steps:
             - checkout
 
-            - attach_workspace: # workspaceをアタッチする
+            - attach_workspace:
                   at: .
 
-            - run:
-                  name: Deploy to S3
+            - deploy:
+                  name: Deploy web page
                   command: |
                       cd frontend
                       mkdir -p dist
                       ./deploy_to_s3.sh
+
+    deploy-serverless:
+        docker:
+            - image: shinsukeabe/circleci-serverless-python3
+
+        steps:
+            - checkout
+
+            - restore_cache:
+                  keys:
+                      - v1-{{ checksum "lambda/package-lock.json" }}
+
+            - run:
+                  name: Install Packages
+                  command: |
+                      cd lambda
+                      npm install --save serverless-python-requirements serverless-prune-plugin
+
+            - save_cache:
+                  paths:
+                      - lambda/node_modules
+                  key: v1-{{ checksum "lambda/package-lock.json" }}
+
+            - run:
+                  name: Deploy lambda function in production environment
+                  command: |
+                      cd lambda
+                      serverless deploy -v -s prod
+
 workflows:
     version: 2
-    build-deploy:
+    build-and-deploy:
         jobs:
             - build
-            - deploy: # deployはbuildのあとに実行
+
+            - deploy-frontend:
                   requires:
                       - build
-                  filters: # developブランチの場合のみデプロイする
+                  filters:
+                      branches:
+                          only: master
+
+            - deploy-serverless:
+                  requires:
+                      - build
+                  filters:
                       branches:
                           only: master
