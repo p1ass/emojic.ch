@@ -15,5 +15,10 @@
 - バックエンドはAWS API GatewayとLambdaを用いたサーバーレスな構成で構築されています。
 - Lambda関数はPythonで書かれており、OpenCVで顔認識を行っています。
 
+## Front-end
+[こちら](./frontend/README.md)のREADMEをご覧ください。
+
+## AWS Lambda
+[こちら](./lambda/README.md)のREADMEをご覧ください。
 ## LICENSE
 MIT
