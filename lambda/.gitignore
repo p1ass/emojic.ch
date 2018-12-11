@@ -16,7 +16,7 @@ upload.zip
 upload_dev.zip
 
 # ローカルテスト用の画像を除外
-test.jpg
+input.jpg
 output.jpg
 
 # Distribution / packaging
