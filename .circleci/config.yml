@@ -73,10 +73,10 @@ jobs:
                   key: v1-{{ checksum "lambda/package-lock.json" }}
 
             - run:
-                  name: Deploy lambda function
+                  name: Deploy lambda function in production environment
                   command: |
                       cd lambda
-                      serverless deploy -v
+                      serverless deploy -v -s prod
 
 workflows:
     version: 2
@@ -94,6 +94,6 @@ workflows:
             - deploy-serverless:
                   requires:
                       - build
-                  # filters:
-                  #     branches:
-                  #         only: master
+                  filters:
+                      branches:
+                          only: master
