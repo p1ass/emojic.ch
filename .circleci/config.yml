@@ -57,15 +57,28 @@ jobs:
         steps:
             - checkout
 
+            - restore_cache:
+                  keys:
+                      - v1-{{ checksum "lambda/package-lock.json" }}
+
             - run:
-                  name: Deploy lambda function
+                  name: Install Packages
                   command: |
                       cd lambda
                       npm install --save serverless-python-requirements serverless-prune-plugin
-                      serverless deploy -v
+
+            - save_cache:
+                  paths:
+                      - lambda/node_modules
+                  key: v1-{{ checksum "lambda/package-lock.json" }}
+
+            - run:
+                  name: Deploy lambda function
+                  command: serverless deploy -v
+
 workflows:
     version: 2
-    build-deploy:
+    build-and-deploy:
         jobs:
             - build
 

@@ -29,6 +29,13 @@ provider:
               - logs:CreateLogGroup
               - logs:CreateLogStream
               - logs:PutLogEvents
+              - cloudformation:CreateStack
+              - cloudformation:DescribeStackResource
+              - cloudformation:DescribeStackResources
+              - cloudformation:DescribeStacks
+              - cloudformation:ListStacks
+              - cloudformation:DeleteStack
+              - cloudformation:UpdateStack
           Resource:
               - '*'
 
