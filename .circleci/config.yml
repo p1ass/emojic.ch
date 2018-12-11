@@ -52,7 +52,7 @@ jobs:
 
     deploy-serverless:
         docker:
-            - image: circleci/node:8.12
+            - image: shinsukeabe/circleci-serverless-python3
 
         steps:
             - checkout
@@ -61,7 +61,6 @@ jobs:
                   name: Deploy lambda function
                   command: |
                       cd lambda
-                      sudo npm install -g serverless
                       npm install --save serverless-python-requirements serverless-prune-plugin
                       serverless deploy -v
 workflows:

@@ -35,9 +35,6 @@ provider:
 custom:
     defaultStage: dev
 
-    pythonRequirements:
-        dockerizePip: true
-
     prune:
         automatic: true
         number: 3
