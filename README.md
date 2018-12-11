@@ -9,7 +9,7 @@
 
 ## Architecture
 
-![アーキテクチャ図](./docs/emojic architecture.png)
+![アーキテクチャ図](./docs/emojic_architecture.png)
 
 - [えもじっく](https://emojic.ch)のフロントエンドはNuxt.jsで構築されています。CircleCIでmasterブランチにマージされるたびにデプロイされます。
 - バックエンドはAWS API GatewayとLambdaを用いたサーバーレスな構成で構築されています。
