@@ -3,6 +3,7 @@ service: emojic
 plugins:
     - serverless-python-requirements
     - serverless-prune-plugin
+    - serverless-apigw-binary
 
 provider:
     name: aws
@@ -43,9 +44,13 @@ custom:
         dev: localhost:3000
         prod: https://emojic.ch
 
-    need_api:
+    needApi:
         dev: false
         prod: true
+
+    apigwBinary:
+        types:
+            - 'image/jpeg'
 
 package:
     exclude:
@@ -67,7 +72,7 @@ functions:
                   method: post
                   timeout: 20
                   memorySize: 512
-                  private: ${self:custom.need_api.${self:provider.stage}}
+                  private: ${self:custom.needApi.${self:provider.stage}}
                   cors:
                       origin: ${self:custom.origin.${self:provider.stage}}
                       headers:

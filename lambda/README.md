@@ -26,10 +26,7 @@ npm install --save serverless-python-requirements serverless-prune-plugin
 serverless deploy -v
 ```
 
-2. バイナリを扱うためにAPI Gatewayの設定からバイナリサポートをONにします。
-バイナリメディアタイプの追加から`image/jpeg`を追加してください。
-
-3. curlからテスト
+2. curlからテスト
 ```bash
 curl -v --request POST -H "Accept: image/jpeg" -H "Content-Type: image/jpeg" --data-binary "@input.jpg" [API_GATEWAY_ENDPINT] > output.jpg
 
