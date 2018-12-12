@@ -65,7 +65,7 @@ jobs:
                   name: Install Packages
                   command: |
                       cd lambda
-                      npm install --save serverless-python-requirements serverless-prune-plugin
+                      npm install --save serverless-python-requirements serverless-prune-plugin serverless-apigw-binary
 
             - save_cache:
                   paths:
