@@ -9,7 +9,6 @@ Nuxt.jsで作られた[えもじっく](https://emojic.ch)のフロントエン�
 module.exports = {
   endpoint: process.env.EMOJIC_DEV_ENDPOINT
 }
-
 ```
 
 2. 起動
