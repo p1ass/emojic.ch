@@ -35,7 +35,7 @@ jobs:
 
     lambda_test:
         docker:
-            - image: circleci/python:3.6.4
+            - image: circleci/python:3.6.7
 
         steps:
             - checkout
@@ -112,8 +112,8 @@ workflows:
     version: 2
     build-and-deploy:
         jobs:
-            - build
             - lambda_test
+            - build
 
             - deploy-frontend:
                   requires:
