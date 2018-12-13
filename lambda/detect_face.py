@@ -46,7 +46,7 @@ def detectFaces(image: np.ndarray,
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # 顔認識を実行
-    cascade_path = "./cv2/data/haarcascade_frontalface_default.xml"
+    cascade_path = "./haarcascade_frontalface_default.xml"
     cascade = cv2.CascadeClassifier(cascade_path)
     faces = cascade.detectMultiScale(
         image_gray,
