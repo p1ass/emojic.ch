@@ -48,7 +48,8 @@ jobs:
                   name: Install pip packages
                   command: |
                       cd lambda
-                      pip install -r requirements.txt
+                      sudo pip install --upgrade pip
+                      sudo pip install -r requirements.txt
 
             - save_cache:
                   paths:
