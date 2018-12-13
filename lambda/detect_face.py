@@ -117,14 +117,14 @@ def lambda_handler(event, context):
         # レスポンスを作成
         body = base64.b64encode(response_image.getvalue()).decode('utf-8')
 
-        status = 200
+        statusCode = 200
 
         # 204で顔が検出されなかったことを表現
         if len(faces) == 0:
-            status = 204
+            statusCode = 204
 
         response = {
-            "statusCode": status,
+            "statusCode": statusCode,
             "headers": {
                 "Content-Type": "image/jpeg",
                 "Access-Control-Allow-Origin": os.environ["EMOJIC_ORIGIN"]
@@ -133,7 +133,7 @@ def lambda_handler(event, context):
             "isBase64Encoded": True
         }
 
-        print(response)
+        # print(response)
         return response
 
     except Exception as e:
@@ -155,9 +155,9 @@ def lambda_handler(event, context):
         return response
 
 
-def test(input_file):
+def outputImageFromFile(input_filename):
 
-    with open(input_file, "rb") as f:
+    with open(input_filename, "rb") as f:
         img_binary = f.read()
 
         event = {"body": base64.b64encode(img_binary)}
@@ -173,4 +173,4 @@ def test(input_file):
 
 
 if __name__ == "__main__":
-    test(sys.argv[1])
+    outputImageFromFile(sys.argv[1])
