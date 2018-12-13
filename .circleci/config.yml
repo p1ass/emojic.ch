@@ -12,7 +12,7 @@ jobs:
                       - v1-{{ checksum "frontend/package.json" }}
 
             - run:
-                  name: Install Package
+                  name: Install npm packages
                   command: |
                       cd frontend
                       yarn
@@ -32,6 +32,37 @@ jobs:
                   root: .
                   paths:
                       - .
+
+    lambda_test:
+        docker:
+            - image: circleci/python:3.6.7
+
+        steps:
+            - checkout
+
+            - run: sudo chown -R circleci:circleci /usr/local/bin
+            - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+
+            - restore_cache:
+                  keys:
+                      - v1-{{ checksum "lambda/requirements.txt" }}
+
+            - run:
+                  name: Install pip packages
+                  command: |
+                      cd lambda
+                      sudo pip install -r requirements.txt
+
+            - save_cache:
+                  paths:
+                      - '/usr/local/lib/python3.6/site-packages'
+                  key: v1-{{ checksum "lambda/requirements.txt" }}
+
+            - run:
+                  name: Run python tests
+                  command: |
+                      cd lambda
+                      python test.py
 
     deploy-frontend:
         docker:
@@ -61,7 +92,7 @@ jobs:
                       - v1-{{ checksum "lambda/package-lock.json" }}
 
             - run:
-                  name: Install Packages
+                  name: Install packages
                   command: |
                       cd lambda
                       npm install --save serverless-python-requirements serverless-prune-plugin serverless-apigw-binary
@@ -81,11 +112,13 @@ workflows:
     version: 2
     build-and-deploy:
         jobs:
+            - lambda_test
             - build
 
             - deploy-frontend:
                   requires:
                       - build
+                      - lambda_test
                   filters:
                       branches:
                           only: master
@@ -93,6 +126,7 @@ workflows:
             - deploy-serverless:
                   requires:
                       - build
+                      - lambda_test
                   filters:
                       branches:
                           only: master

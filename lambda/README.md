@@ -10,7 +10,7 @@ pip install -r requrirements.txt
 
 ## Test
 ```bash
-python detect_face.py [INPUT_FILE]
+python test.py
 ```
 
 変換後のファイルが同じディレクトリに出力されます。
