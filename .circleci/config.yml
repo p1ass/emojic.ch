@@ -40,6 +40,8 @@ jobs:
         steps:
             - checkout
 
+            - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+
             - restore_cache:
                   keys:
                       - v1-{{ checksum "lambda/requirements.txt" }}
