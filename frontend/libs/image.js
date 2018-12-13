@@ -28,38 +28,36 @@ export default {
   // 画像のリサイズ
   // https://www.bokukoko.info/entry/2016/03/28/JavaScript_で画像をリサイズする方法
   resizeImage(image) {
-    const MIN_SIZE = 1000
+    const MAX_SIZE = 2000
     let canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
     const reader = new FileReader()
 
-    const vm = this
-
     return new Promise((resolve, reject) => {
-      image.onload = async function(event) {
-        let dstWidth, dstHeight
-        if (this.width > this.height) {
-          dstWidth = MIN_SIZE
-          dstHeight = (this.height * MIN_SIZE) / this.width
+      image.onload = () => {
+        let dst_width, dst_height
+        if (image.width > image.height) {
+          dst_width = MAX_SIZE
+          dst_height = (image.height * MAX_SIZE) / image.width
         } else {
-          dstHeight = MIN_SIZE
-          dstWidth = (this.width * MIN_SIZE) / this.height
+          dst_height = MAX_SIZE
+          dst_width = (image.width * MAX_SIZE) / image.height
         }
-        canvas.width = dstWidth
-        canvas.height = dstHeight
+        canvas.width = dst_width
+        canvas.height = dst_height
         ctx.drawImage(
-          this,
+          image,
           0,
           0,
-          this.width,
-          this.height,
+          image.width,
+          image.height,
           0,
           0,
-          dstWidth,
-          dstHeight
+          dst_width,
+          dst_height
         )
 
-        resolve(vm._canvasToBlob(canvas))
+        resolve(this._canvasToBlob(canvas))
       }
     })
   },
