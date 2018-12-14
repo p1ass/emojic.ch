@@ -13,10 +13,10 @@ export default {
         loadImage(
           image,
           canvas => {
-            const dataUri = canvas.toDataURL('image/jpeg')
+            const data_uri = canvas.toDataURL('image/jpeg')
             // 画像を作成
             let img = new Image()
-            img.src = dataUri
+            img.src = data_uri
             resolve(img)
           },
           options
@@ -36,7 +36,14 @@ export default {
     return new Promise((resolve, reject) => {
       image.onload = () => {
         let dst_width, dst_height
-        if (image.width > image.height) {
+
+        const max_image_size = Math.max(image.width, image.height)
+
+        // MAX_SIZEより画像が小さかったらサイズを変換しない
+        if (max_image_size < MAX_SIZE) {
+          dst_width = image.width
+          dst_height = image.height
+        } else if (image.width > image.height) {
           dst_width = MAX_SIZE
           dst_height = (image.height * MAX_SIZE) / image.width
         } else {
