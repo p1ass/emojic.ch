@@ -6,7 +6,7 @@ export default {
   fixImageOrientationAndSize(image) {
     return new Promise((resolve, reject) => {
       loadImage.parseMetaData(image, data => {
-        const MAX_SIZE = 2000
+        const MAX_SIZE = 1000
 
         const options = {
           maxHeight: MAX_SIZE,

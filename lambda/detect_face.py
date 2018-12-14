@@ -7,6 +7,7 @@ import json
 import random
 import os
 import sys
+import boto3
 from typing import List
 
 """
@@ -27,32 +28,15 @@ def convertBinaryToImageArray(binary: bytes) -> np.ndarray:
     return image_array
 
 
-"""
-image : 顔認識を行いたい画像
-min_face_size_ratio : 顔の最小検出サイズを画像の縦横短い方に対する比率で指定する。 0.0 ~ 1.0
-返り値 : 顔認識結果の入った配列
-"""
+def detectFacesByRekognition(image_binary: bytes) -> List[List[int]]:
+    client = boto3.client('rekognition')
+    response = client.detect_faces(
+        Image={'Bytes': image_binary}, Attributes=['ALL'])
 
-
-def detectFaces(image: np.ndarray,
-                min_face_size_ratio: float) -> List[List[int]]:
-
-    height, width, _ = image.shape[:3]
-
-    # 顔の最小検出サイズ
-    min_face_size = int(min(height, width) * min_face_size_ratio)
-
-    # グレースケール変換
-    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    # 顔認識を実行
-    cascade_path = "./haarcascade_frontalface_default.xml"
-    cascade = cv2.CascadeClassifier(cascade_path)
-    faces = cascade.detectMultiScale(
-        image_gray,
-        scaleFactor=1.1,
-        minNeighbors=2,
-        minSize=(min_face_size, min_face_size))
+    faces = list()
+    for face_info in response["FaceDetails"]:
+        faces.append(face_info["BoundingBox"])
+        print(face_info["BoundingBox"])
 
     return faces
 
@@ -66,6 +50,18 @@ face : 顔認識結果
 
 def pasteEmoji(image: np.ndarray, face: List[int]) -> np.ndarray:
 
+    height, width, _ = image.shape[:3]
+
+    face_top = round(height * face["Top"])
+    face_left = round(width * face["Left"])
+    face_size = max(
+        round(height * face["Height"]), round(width * face["Width"]))
+
+    # 顔が画像からはみ出しそうなときはサイズを小さくする
+    if face_top + face_size > height or face_left + face_size > width:
+
+        face_size = min(height - face_top, width - face_left)
+
     # -1 : アルファチャンネルで読み込む
     emoji = cv2.imread(
         "emoji/{:0=3}.png".format(random.randrange(1, 71, 1)), -1)
@@ -75,7 +71,7 @@ def pasteEmoji(image: np.ndarray, face: List[int]) -> np.ndarray:
 
     # 絵文字の画像サイズを顔の大きさに揃える
     resized_emoji = cv2.resize(
-        emoji, (face[2], face[3]))
+        emoji, (face_size, face_size))
 
     # 透過処理
     # https://blanktar.jp/blog/2015/02/python-opencv-overlay.html
@@ -87,9 +83,11 @@ def pasteEmoji(image: np.ndarray, face: List[int]) -> np.ndarray:
     image = image.astype("float64")
 
     # 顔に画像を貼り付け
-    image[face[1]:face[1] + face[2], face[0]:face[0] + face[3]] *= 1 - mask
-    image[face[1]:face[1] + face[2], face[0]:face[0] +
-          face[3]] += mask * resized_emoji[:, :, 0:3]
+    image[face_top:face_top + face_size,
+          face_left:face_left + face_size] *= 1 - mask
+
+    image[face_top:face_top + face_size,
+          face_left:face_left + face_size] += mask * resized_emoji[:, :, 0:3]
 
     return image
 
@@ -102,8 +100,8 @@ def pasteEmoji(image: np.ndarray, face: List[int]) -> np.ndarray:
 def lambda_handler(event, context):
     try:
         binary_image = base64.b64decode(event["body"])
+        faces = detectFacesByRekognition(binary_image)
         image = convertBinaryToImageArray(binary_image)
-        faces = detectFaces(image, 0.12)
 
         for face in faces:
             image = pasteEmoji(image, face)
@@ -132,8 +130,8 @@ def lambda_handler(event, context):
             "body": body,
             "isBase64Encoded": True
         }
-
-        # print(response)
+        log = {"face_count": len(faces)}
+        print(str(log))
         return response
 
     except Exception as e:
@@ -168,8 +166,7 @@ def outputImageFromFile(input_filename):
         with open("output.jpg", "wb") as f:
             f.write(test)
 
-        print("Success!")
-        print(response)
+        print(response["statusCode"])
 
 
 if __name__ == "__main__":

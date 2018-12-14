@@ -70,7 +70,7 @@ export default {
           title: '複数の顔も認識してくれます😁'
         },
         { src: '/images/random.jpg', title: '選ばれる絵文字はランダム😜' },
-        { src: '/images/yokogao.jpg', title: '横顔は認識しづらいよ😩' }
+        { src: '/images/cat.jpg', title: '動物の顔は認識できないよ😹' }
       ],
       is_mobile: isMobile.any
     }

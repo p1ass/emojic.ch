@@ -24,7 +24,7 @@ class TestLambdaHandler(unittest.TestCase):
 
     # 顔がないと204が返ってくる
     def test_no_face(self):
-        filename = "no_face.jpg"
+        filename = "cat.jpg"
         response = self.getResponse(filename)
         self.assertEqual(204, response["statusCode"])
 
