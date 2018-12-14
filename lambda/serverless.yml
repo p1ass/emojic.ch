@@ -57,6 +57,7 @@ package:
         - ./**
     include:
         - detect_face.py
+        - haarcascade_frontalface_default.xml
         - emoji/**
 
 functions:
