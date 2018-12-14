@@ -30,6 +30,7 @@ provider:
               - logs:CreateLogGroup
               - logs:CreateLogStream
               - logs:PutLogEvents
+              - rekognition:DetectFaces
           Resource:
               - '*'
 
