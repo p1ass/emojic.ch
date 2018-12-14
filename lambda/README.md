@@ -9,6 +9,13 @@ pip install -r requrirements.txt
 ```
 
 ## Test
+AWS Recognitionへのアクセスを許可されたAPIキー等を環境変数に設定します。
+
+```bash
+export AWS_ACCESS_KEY_ID=xxxxxxxxxxxxxxxx    
+export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxx
+export AWS_DEFAULT_REGION=ap-northeast-1 
+```
 ```bash
 python test.py
 ```
@@ -21,9 +28,7 @@ python detect_face.py [INPUT_IMAGE_PATH]
 変換後のファイルが`output.jpg`として出力されます。
 
 ## How to deploy
-1. Serverless Frameworkを使ってデプロイを行います。以下のリンク先を参考に、AWSの秘密鍵の設定が必要です。
-
-[https://serverless.com/framework/docs/providers/aws/guide/credentials/](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
+1. Serverless Frameworkを使ってデプロイを行います。
 
 ```
 npm install -g serverless

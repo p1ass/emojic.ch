@@ -54,14 +54,22 @@ def pasteEmoji(image: np.ndarray, face: List[int]) -> np.ndarray:
 
     face_top = round(height * face["Top"])
     face_left = round(width * face["Left"])
-    face_size = max(
-        round(height * face["Height"]), round(width * face["Width"]))
+    face_height = round(height * face["Height"])
+    face_width = round(height * face["Width"])
+
+    # 顔の枠を正方形にする
+    face_size = round(max(face_height, face_width))
+
+    # 絵文字が顔の真ん中にくるように座標を調整
+    if face_height > face_width:
+        face_left -= round((face_size - face_width)/2)
+    elif face_width > face_height:
+        face_top -= round((face_size - face_height)/2)
 
     # 顔が画像からはみ出しそうなときはサイズを小さくする
     if face_top + face_size > height or face_left + face_size > width:
-
         face_size = min(height - face_top, width - face_left)
-
+        
     # -1 : アルファチャンネルで読み込む
     emoji = cv2.imread(
         "emoji/{:0=3}.png".format(random.randrange(1, 71, 1)), -1)
