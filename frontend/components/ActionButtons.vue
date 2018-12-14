@@ -96,9 +96,10 @@ export default {
 
       try {
         this.openLoading()
+        const blob_image = await ImageUtil.fixImageOrientationAndSize(
+          this.image
+        )
 
-        const fixed_image = await ImageUtil.fixImageOrientation(this.image)
-        const blob_image = await ImageUtil.resizeImage(fixed_image)
         await this.uploadImage(blob_image)
       } catch (e) {
         this.dialogUnExpectedError()

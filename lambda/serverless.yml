@@ -57,21 +57,22 @@ package:
         - ./**
     include:
         - detect_face.py
+        - haarcascade_frontalface_default.xml
         - emoji/**
 
 functions:
     upload:
         handler: detect_face.lambda_handler
-        timeout: 20
-        memorySize: 512
+        timeout: 10
+        memorySize: 768
         environment:
             EMOJIC_ORIGIN: ${self:custom.origin.${self:provider.stage}}
         events:
             - http:
                   path: upload
                   method: post
-                  timeout: 20
-                  memorySize: 512
+                  timeout: 10
+                  memorySize: 768
                   private: ${self:custom.needApi.${self:provider.stage}}
                   cors:
                       origin: ${self:custom.origin.${self:provider.stage}}

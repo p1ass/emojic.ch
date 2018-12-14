@@ -2,14 +2,14 @@
   <div>
     <div class="flex">
       <image-card 
-        :src="top_image.src" 
-        :title="top_image.title" />
+        :src="result_src" 
+        title="あなたの顔を絵文字😄に変換!?" />
     </div>
     <action-buttons/>
     <p class="flex attention">サーバーに画像を保存しません！</p>
     <p class="flex attention">画像は長押しで保存してね！</p>
+
     <div class="flex ad">
-      <!-- admax -->
       <div 
         v-if="is_mobile"
         class="admax-ads" 
@@ -21,7 +21,6 @@
         charset="utf-8" 
         src="//adm.shinobi.jp/st/t.js" 
         async/>
-        <!-- admax -->
     </div>
 
     <div class="flex">
@@ -37,7 +36,7 @@
     </div>
 
     <action-buttons/>
-    <!-- admax -->
+
     <div class="flex ad">
       <div 
         class="admax-switch" 
@@ -50,7 +49,6 @@
         src="//adm.shinobi.jp/st/t.js" 
       />
     </div>
-    <!-- admax -->
   </div>
 </template>
 
@@ -66,12 +64,6 @@ export default {
   },
   data() {
     return {
-      top_image: {
-        // 最初は直接叩かないと上手く行かない
-        src: this.$store.state.result.result_src,
-        title: 'あなたの顔を絵文字😄に変換!?'
-      },
-
       example_images: [
         {
           src: '/images/multi_faces.jpg',
@@ -84,25 +76,8 @@ export default {
     }
   },
 
-  head() {
-    return {
-      script: [
-        {
-          src:
-            'https://cdn.rawgit.com/blueimp/JavaScript-Load-Image/v2.6.2/js/load-image.all.min.js'
-        }
-      ]
-    }
-  },
-
   computed: {
     ...mapState('result', ['result_src'])
-  },
-
-  watch: {
-    result_src() {
-      this.top_image.src = this.result_src
-    }
   }
 }
 </script>

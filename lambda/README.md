@@ -13,7 +13,12 @@ pip install -r requrirements.txt
 python test.py
 ```
 
-変換後のファイルが同じディレクトリに出力されます。
+## Convert mage from local file
+```bash
+python detect_face.py [INPUT_IMAGE_PATH]
+```
+
+変換後のファイルが`output.jpg`として出力されます。
 
 ## How to deploy
 1. Serverless Frameworkを使ってデプロイを行います。以下のリンク先を参考に、AWSの秘密鍵の設定が必要です。
@@ -28,6 +33,6 @@ serverless deploy -v
 
 2. curlからテスト
 ```bash
-curl -v --request POST -H "Accept: image/jpeg" -H "Content-Type: image/jpeg" --data-binary "@input.jpg" [API_GATEWAY_ENDPINT] > output.jpg
+curl -v --request POST -H "Accept: image/jpeg" -H "Content-Type: image/jpeg" --data-binary "@input.jpg" [API_GATEWAY_ENDPOINT] > output.jpg
 
 ```
