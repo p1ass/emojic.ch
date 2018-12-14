@@ -11,9 +11,10 @@
 
 ![アーキテクチャ図](./docs/emojic_architecture.png)
 
-- [えもじっく](https://emojic.ch)のフロントエンドはNuxt.jsで構築されています。CircleCIでmasterブランチにマージされるたびにデプロイされます。
+- [えもじっく](https://emojic.ch)のフロントエンドはNuxt.jsで構築されています。
 - バックエンドAPIはAamazon API GatewayとAWS LambdaをServerless Frameworkを使って構築しています。
 - Lambda関数はPythonで書かれており、Amazon Rekognitionを使って顔認識を行っています。
+- デプロイはすべてCircleCIで行っており、masterブランチにマージされるたびにデプロイされます。
 
 ## 紹介記事
 [人の顔を絵文字😇に変換するWebサービスをAmazon Rekognition x Serverlessで開発して、デプロイをCIで自動化した話](https://qiita.com/wagase/items/fa0215cee44251bf2e50)
