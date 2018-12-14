@@ -19,9 +19,9 @@
 [人の顔を絵文字😇に変換するWebサービスをAmazon Rekognition x Serverlessで開発して、デプロイをCIで自動化した話](https://qiita.com/wagase/items/fa0215cee44251bf2e50)
 
 ## Front-end
-[こちら](./frontend/README.md)のREADMEをご覧ください。
+[こちらのREADME](./frontend/README.md)をご覧ください。
 
 ## AWS Lambda
-[こちら](./lambda/README.md)のREADMEをご覧ください。
+[こちらのREADME](./lambda/README.md)をご覧ください。
 ## LICENSE
 MIT
