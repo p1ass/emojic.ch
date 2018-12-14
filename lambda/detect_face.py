@@ -28,7 +28,7 @@ def convertBinaryToImageArray(binary: bytes) -> np.ndarray:
     return image_array
 
 
-def detectFacesByRekognition(image_binary: bytes) -> List[List[int]]:
+def detectFacesByRekognition(image_binary: bytes) -> List[List[float]]:
     client = boto3.client('rekognition')
     response = client.detect_faces(
         Image={'Bytes': image_binary}, Attributes=['ALL'])
@@ -48,7 +48,7 @@ face : 顔認識結果
 """
 
 
-def pasteEmoji(image: np.ndarray, face: List[int]) -> np.ndarray:
+def pasteEmoji(image: np.ndarray, face: List[float]) -> np.ndarray:
 
     height, width, _ = image.shape[:3]
 
