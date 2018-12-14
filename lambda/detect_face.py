@@ -17,7 +17,7 @@ binary : 画像のバイナリデータ
 """
 
 
-def convertBinaryToImage(binary: bytes) -> np.ndarray:
+def convertBinaryToImageArray(binary: bytes) -> np.ndarray:
     # 一旦Pillow用の画像データにする
     pil_image = Image.open(io.BytesIO(binary))
 
@@ -102,7 +102,7 @@ def pasteEmoji(image: np.ndarray, face: List[int]) -> np.ndarray:
 def lambda_handler(event, context):
     try:
         binary_image = base64.b64decode(event["body"])
-        image = convertBinaryToImage(binary_image)
+        image = convertBinaryToImageArray(binary_image)
         faces = detectFaces(image, 0.12)
 
         for face in faces:
