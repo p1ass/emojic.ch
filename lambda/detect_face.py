@@ -28,7 +28,7 @@ def convertBinaryToImageArray(binary: bytes) -> np.ndarray:
     return image_array
 
 
-def detectFacesByRekognition(image_binary: bytes) -> List[List[int]]:
+def detectFacesByRekognition(image_binary: bytes) -> List[List[float]]:
     client = boto3.client('rekognition')
     response = client.detect_faces(
         Image={'Bytes': image_binary}, Attributes=['ALL'])
@@ -48,7 +48,7 @@ face : 顔認識結果
 """
 
 
-def pasteEmoji(image: np.ndarray, face: List[int]) -> np.ndarray:
+def pasteEmoji(image: np.ndarray, face: List[float]) -> np.ndarray:
 
     height, width, _ = image.shape[:3]
 
@@ -69,7 +69,7 @@ def pasteEmoji(image: np.ndarray, face: List[int]) -> np.ndarray:
     # 顔が画像からはみ出しそうなときはサイズを小さくする
     if face_top + face_size > height or face_left + face_size > width:
         face_size = min(height - face_top, width - face_left)
-        
+
     # -1 : アルファチャンネルで読み込む
     emoji = cv2.imread(
         "emoji/{:0=3}.png".format(random.randrange(1, 71, 1)), -1)
@@ -119,13 +119,10 @@ def lambda_handler(event, context):
         response_image = io.BytesIO()
         Image.fromarray(image.astype('uint8')).save(
             response_image, "JPEG")
-
-        # レスポンスを作成
         body = base64.b64encode(response_image.getvalue()).decode('utf-8')
 
-        statusCode = 200
-
         # 204で顔が検出されなかったことを表現
+        statusCode = 200
         if len(faces) == 0:
             statusCode = 204
 

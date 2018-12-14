@@ -11,14 +11,18 @@
 
 ![アーキテクチャ図](./docs/emojic_architecture.png)
 
-- [えもじっく](https://emojic.ch)のフロントエンドはNuxt.jsで構築されています。CircleCIでmasterブランチにマージされるたびにデプロイされます。
-- バックエンドはAWS API GatewayとLambdaを用いたサーバーレスな構成で構築されています。
-- Lambda関数はPythonで書かれており、OpenCVで顔認識を行っています。
+- [えもじっく](https://emojic.ch)のフロントエンドはNuxt.jsで構築されています。
+- バックエンドAPIはAamazon API GatewayとAWS LambdaをServerless Frameworkを使って構築しています。
+- Lambda関数はPythonで書かれており、Amazon Rekognitionを使って顔認識を行っています。
+- デプロイはすべてCircleCIで行っており、masterブランチにマージされるたびにデプロイされます。
+
+## 紹介記事
+[人の顔を絵文字😇に変換するWebサービスをAmazon Rekognition x Serverlessで開発して、デプロイをCIで自動化した話](https://qiita.com/wagase/items/fa0215cee44251bf2e50)
 
 ## Front-end
-[こちら](./frontend/README.md)のREADMEをご覧ください。
+[こちらのREADME](./frontend/README.md)をご覧ください。
 
 ## AWS Lambda
-[こちら](./lambda/README.md)のREADMEをご覧ください。
+[こちらのREADME](./lambda/README.md)をご覧ください。
 ## LICENSE
 MIT
