@@ -33,7 +33,7 @@ jobs:
                   paths:
                       - .
 
-    lambda_test:
+    test_lambda:
         docker:
             - image: circleci/python:3.6.7
 
@@ -112,13 +112,13 @@ workflows:
     version: 2
     build-and-deploy:
         jobs:
-            - lambda_test
+            - test_lambda
             - build
 
             - deploy-frontend:
                   requires:
                       - build
-                      - lambda_test
+                      - test_lambda
                   filters:
                       branches:
                           only: master
@@ -126,7 +126,7 @@ workflows:
             - deploy-serverless:
                   requires:
                       - build
-                      - lambda_test
+                      - test_lambda
                   filters:
                       branches:
                           only: master
