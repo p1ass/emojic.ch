@@ -1,7 +1,7 @@
 # えもじっく Lambda
 
 ## Summary
-OpenCVを使って画像から顔認識を行い、😇に変換するスクリプトです。
+Amazon Rekognitionを使って画像から顔認識を行い、😇に変換するスクリプトです。
 
 ## Requirements
 ```bash
@@ -9,7 +9,7 @@ pip install -r requrirements.txt
 ```
 
 ## Test
-AWS Recognitionへのアクセスを許可されたAPIキー等を環境変数に設定します。
+Amazon Recognitionへのアクセスを許可されたAPIキー等を環境変数に設定します。
 
 ```bash
 export AWS_ACCESS_KEY_ID=xxxxxxxxxxxxxxxx    
@@ -20,7 +20,7 @@ export AWS_DEFAULT_REGION=ap-northeast-1
 python test.py
 ```
 
-## Convert mage from local file
+## Convert image from local file
 ```bash
 python detect_face.py [INPUT_IMAGE_PATH]
 ```
