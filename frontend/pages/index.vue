@@ -3,11 +3,10 @@
     <div class="flex">
       <image-card 
         :src="result_src" 
-        title="あなたの顔を絵文字😄に変換!?" />
+        title="あなたの顔に自動でスタンプ😄" />
     </div>
     <action-buttons/>
-    <p class="flex attention">サーバーに画像を保存しません！</p>
-    <p class="flex attention">画像は長押しで保存してね！</p>
+    <p class="flex attention">画像は長押しで保存してね</p>
 
     <div class="flex ad">
       <div 
