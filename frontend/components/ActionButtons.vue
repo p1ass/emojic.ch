@@ -3,7 +3,7 @@
     <div class="buttons">
       <label class="button select-image vs-component vs-button button vs-button-null vs-button-relief large">
         <div >
-          写真をえらぶ！
+          写真をえらぶ
           <input 
             :value="filePpath"
             type="file"
@@ -22,7 +22,7 @@
         color="#ff6348"
         class="button"
         @click="startUploading"
-      >絵文字に変換！</vs-button>
+      >絵文字に変換</vs-button>
 
       <vs-button 
         :icon-after="true" 
@@ -30,7 +30,7 @@
         size="large"
         class="button"
         color="#1e90ff"
-        @click="openTwitter">Twitterを開く！</vs-button>
+        @click="openTwitter">Twitterを開く</vs-button>
     </div>
   </div>
 </template>

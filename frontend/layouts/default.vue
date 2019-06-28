@@ -23,6 +23,7 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:400,500');
 html {
   font-family: 'M PLUS Rounded 1c', sans-serif;
+  color: #343434;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

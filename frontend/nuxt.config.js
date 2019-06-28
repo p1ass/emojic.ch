@@ -9,7 +9,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'えもじっく😋 | 顔認識で人の顔を絵文字にします',
+    title: 'えもじっく😋 | 顔認識で人の顔にスタンプを貼り付けてくれるWebアプリ',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
