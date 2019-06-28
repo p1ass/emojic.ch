@@ -13,6 +13,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/global.scss';
 header {
   background-color: $main_color;
   height: 80px;
