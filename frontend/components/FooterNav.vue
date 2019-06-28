@@ -13,6 +13,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/global.scss';
+
 footer {
   background-color: $main_color;
   height: 60px;
