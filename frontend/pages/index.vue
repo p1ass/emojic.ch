@@ -22,7 +22,10 @@
         async/>
     </div>
 
+    <h2 class="what-is-emojic-header">えもじっくとは？</h2>
+
     <div class="flex">
+    
       <div 
         v-for="example in example_images" 
         :key="example.title"
@@ -88,6 +91,16 @@ export default {
   justify-content: space-around;
   align-items: center;
   align-content: center;
+}
+
+.what-is-emojic-header {
+  text-align: center;
+  font-size: 32px;
+  margin: 16px 0;
+
+  @media (max-width: 670px) {
+    font-size: 24px;
+  }
 }
 
 .ad {
