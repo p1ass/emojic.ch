@@ -1,5 +1,7 @@
 # [えもじっく](https://emojic.ch)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/naoki-kishi/emojic.ch.svg)](https://greenkeeper.io/)
+
 ![トップページ](./docs/top_image_pc.png)
 
 ## Summray
