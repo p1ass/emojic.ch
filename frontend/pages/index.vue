@@ -14,14 +14,14 @@
         class="admax-ads"
         data-admax-id="0583263027895ecbac9c67f7788a5a74"
         style="display:inline-block;width:320px;height:50px;"
-      />
+      ></div>
       <script src="../ad/banner.js"></script>
       <script
         type="text/javascript"
         charset="utf-8"
-        src="//adm.shinobi.jp/st/t.js"
+        src="https://adm.shinobi.jp/st/t.js"
         async
-      />
+      ></script>
     </div>
 
     <h2 class="what-is-emojic-header">
