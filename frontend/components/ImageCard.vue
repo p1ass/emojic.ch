@@ -1,19 +1,14 @@
 <template>
-  <vs-card 
-    :fixed-height="true"
-    class="cardx">
+  <vs-card :fixed-height="true" class="cardx">
     <div slot="header">
       <h3>
         {{ title }}
       </h3>
     </div>
     <div slot="media">
-      <img 
-        :src="src"
-        class = "card-image"
-      >
+      <img :src="src" class="card-image" />
     </div>
-    <div/>  
+    <div />
   </vs-card>
 </template>
 

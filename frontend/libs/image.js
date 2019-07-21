@@ -19,8 +19,8 @@ export default {
         loadImage(
           image,
           canvas => {
-            const data_uri = canvas.toDataURL('image/jpeg')
-            resolve(this._dataUriToBlob(data_uri))
+            const dataUri = canvas.toDataURL('image/jpeg')
+            resolve(this._dataUriToBlob(dataUri))
           },
           options
         )
@@ -28,16 +28,16 @@ export default {
     })
   },
 
-  _dataUriToBlob(data_uri) {
+  _dataUriToBlob(dataUri) {
     // 必ずJPEGでBlobに変換する
     const type = 'image/jpeg'
 
-    const bin = atob(data_uri.split(',')[1])
-    let buffer = new Uint8Array(bin.length)
+    const bin = atob(dataUri.split(',')[1])
+    const buffer = new Uint8Array(bin.length)
     for (let i = 0; i < bin.length; i++) {
       buffer[i] = bin.charCodeAt(i)
     }
 
-    return new Blob([buffer.buffer], { type: type })
+    return new Blob([buffer.buffer], { type })
   }
 }
