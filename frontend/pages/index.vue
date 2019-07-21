@@ -8,7 +8,10 @@
       画像は長押しで保存してね
     </p>
 
-    <adsbygoogle :ad-slot="'4532888257'" />
+    <adsbygoogle
+      :ad-slot="'4532888257'"
+      ad-style="{ display: 'block', text-align: center }"
+    />
 
     <h2 class="what-is-emojic-header">
       えもじっくとは？
