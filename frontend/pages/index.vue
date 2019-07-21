@@ -11,7 +11,7 @@
     <div class="ad">
       <adsbygoogle
         :ad-slot="'4532888257'"
-        :ad-style="{ margin: 20 + 'px' }"
+        :ad-style="{ display: 'block', margin: 20 + 'px' }"
         class="ad"
       />
     </div>
@@ -31,7 +31,7 @@
     <div class="ad">
       <adsbygoogle
         :ad-slot="'3126638947'"
-        :ad-style="{ margin: 20 + 'px' }"
+        :ad-style="{ display: 'block', margin: 20 + 'px' }"
         class="ad"
       />
     </div>
