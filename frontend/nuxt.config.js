@@ -76,6 +76,12 @@ module.exports = {
       {
         id: 'UA-127036212-3'
       }
+    ],
+    [
+      '@nuxtjs/google-adsense',
+      {
+        id: 'ca-pub-4978327687969784'
+      }
     ]
   ],
   manifest: {
