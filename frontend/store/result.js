@@ -21,7 +21,7 @@ export const actions = {
 
       // Data URLを作成
       new Promise((resolve, reject) => {
-        let reader = new FileReader()
+        const reader = new FileReader()
         reader.onload = event => {
           resolve(event.target.result)
         }

@@ -1,45 +1,51 @@
 <template>
   <div>
     <div class="buttons">
-      <label class="button select-image vs-component vs-button button vs-button-null vs-button-relief large">
-        <div >
+      <label
+        class="button select-image vs-component vs-button button vs-button-null vs-button-relief large"
+      >
+        <div>
           写真をえらぶ
-          <input 
+          <input
             :value="filePpath"
             type="file"
             accept="image/*"
             @change="setImage"
-          >
+          />
         </div>
       </label>
 
-      <vs-button 
-        id="input-button" 
-        :icon-after="true" 
+      <vs-button
+        id="input-button"
+        :icon-after="true"
         :disabled="!isSelected"
         type="relief"
         size="large"
         color="#ff6348"
         class="button"
         @click="startUploading"
-      >絵文字に変換</vs-button>
+      >
+        絵文字に変換
+      </vs-button>
 
-      <vs-button 
-        :icon-after="true" 
+      <vs-button
+        :icon-after="true"
         type="relief"
         size="large"
         class="button"
         color="#1e90ff"
-        @click="openTwitter">Twitterを開く</vs-button>
+        @click="openTwitter"
+      >
+        Twitterを開く
+      </vs-button>
     </div>
   </div>
 </template>
 
 <script>
-import UploadAPI from '@/libs/upload'
-import ImageUtil from '@/libs/image'
 import { mapActions } from 'vuex'
 import isMobile from 'ismobilejs'
+import ImageUtil from '@/libs/image'
 
 export default {
   name: 'Buttons',
@@ -57,7 +63,7 @@ export default {
 
   watch: {
     image() {
-      if (this.image == undefined) {
+      if (this.image === undefined) {
         this.isSelected = false
       } else {
         this.isSelected = true
@@ -67,7 +73,7 @@ export default {
 
   methods: {
     openTwitter() {
-      if (isMobile.any == true) {
+      if (isMobile.any === true) {
         window.open('https://twitter.com/intent/tweet?hashtags=えもじっく')
       } else {
         window.open('https://twitter.com/')
@@ -84,7 +90,7 @@ export default {
 
     async startUploading() {
       // 画像が選ばれているか確認
-      if (this.image.type != 'image/jpeg' && this.image.type != 'image/png') {
+      if (this.image.type !== 'image/jpeg' && this.image.type !== 'image/png') {
         this.$vs.dialog({
           color: 'danger',
           title: `対応していない画像が選ばれました`,
@@ -96,11 +102,9 @@ export default {
 
       try {
         this.openLoading()
-        const blob_image = await ImageUtil.fixImageOrientationAndSize(
-          this.image
-        )
+        const blobImage = await ImageUtil.fixImageOrientationAndSize(this.image)
 
-        await this.uploadImage(blob_image)
+        await this.uploadImage(blobImage)
       } catch (e) {
         this.dialogUnExpectedError()
       } finally {
@@ -114,9 +118,9 @@ export default {
         await this.$store.dispatch('result/updateImageAction', blob)
         this.notifySuccess()
       } catch (e) {
-        if (e.message == 204) {
+        if (e.message === 204) {
           this.notifyFailed()
-        } else if (400 <= e.message <= 499) {
+        } else if (e.message >= 400 <= 499) {
           this.dialogUnSpoortError()
         } else {
           this.dialogUnExpectedError()
