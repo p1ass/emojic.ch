@@ -9,7 +9,11 @@
     </p>
 
     <div class="ad">
-      <adsbygoogle :ad-slot="'4532888257'" :ad-style="{ margin: 20 + 'px' }" />
+      <adsbygoogle
+        :ad-slot="'4532888257'"
+        :ad-style="{ margin: 20 + 'px' }"
+        class="ad"
+      />
     </div>
 
     <h2 class="what-is-emojic-header">
@@ -25,7 +29,11 @@
     <action-buttons />
 
     <div class="ad">
-      <adsbygoogle :ad-slot="'3126638947'" :ad-style="{ margin: 20 + 'px' }" />
+      <adsbygoogle
+        :ad-slot="'3126638947'"
+        :ad-style="{ margin: 20 + 'px' }"
+        class="ad"
+      />
     </div>
   </div>
 </template>
