@@ -8,10 +8,9 @@
       画像は長押しで保存してね
     </p>
 
-    <adsbygoogle
-      :ad-slot="'4532888257'"
-      ad-style="{ display: 'block', text-align: center }"
-    />
+    <div class="ad">
+      <adsbygoogle :ad-slot="'4532888257'" :ad-style="{ margin: 20 + 'px' }" />
+    </div>
 
     <h2 class="what-is-emojic-header">
       えもじっくとは？
@@ -25,7 +24,9 @@
 
     <action-buttons />
 
-    <adsbygoogle :ad-slot="'3126638947'" />
+    <div class="ad">
+      <adsbygoogle :ad-slot="'3126638947'" :ad-style="{ margin: 20 + 'px' }" />
+    </div>
   </div>
 </template>
 
@@ -79,7 +80,8 @@ export default {
 }
 
 .ad {
-  margin: 10px 0;
+  text-align: center;
+  margin: 20px;
 }
 
 .attention {
