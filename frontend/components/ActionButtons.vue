@@ -118,9 +118,9 @@ export default {
         await this.$store.dispatch('result/updateImageAction', blob)
         this.notifySuccess()
       } catch (e) {
-        if (e.message === 204) {
+        if (Number(e.message) === 204) {
           this.notifyFailed()
-        } else if (e.message >= 400 <= 499) {
+        } else if (Number(e.message) >= 400 <= 499) {
           this.dialogUnSpoortError()
         } else {
           this.dialogUnExpectedError()
