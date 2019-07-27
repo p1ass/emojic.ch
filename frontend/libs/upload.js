@@ -10,7 +10,7 @@ export default {
         responseType: 'blob'
       })
     } catch (e) {
-      throw new Error(e.status)
+      throw new Error(e.response.status)
     }
 
     if (response.status !== 200) {
