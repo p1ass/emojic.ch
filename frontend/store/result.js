@@ -5,33 +5,29 @@ import UploadAPI from '@/libs/upload'
 Vue.use(Vuex)
 
 export const state = () => ({
-  result_src: '/images/main.jpg'
+  result_src: '/images/main.jpg',
 })
 
 export const mutations = {
   setResultSrc(state, payload) {
     state.result_src = payload
-  }
+  },
 }
 
 export const actions = {
   async updateImageAction({ commit }, file) {
-    try {
-      const blob = await UploadAPI.uploadImage(file)
+    const blob = await UploadAPI.uploadImage(file)
 
-      // Data URLを作成
-      new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onload = event => {
-          resolve(event.target.result)
-        }
+    // Data URLを作成
+    new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        resolve(event.target.result)
+      }
 
-        reader.readAsDataURL(blob)
-      }).then(result => {
-        commit('setResultSrc', result)
-      })
-    } catch (e) {
-      throw e
-    }
-  }
+      reader.readAsDataURL(blob)
+    }).then((result) => {
+      commit('setResultSrc', result)
+    })
+  },
 }

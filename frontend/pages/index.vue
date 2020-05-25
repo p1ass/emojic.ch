@@ -46,25 +46,25 @@ import ActionButtons from '~/components/ActionButtons'
 export default {
   components: {
     ImageCard,
-    ActionButtons
+    ActionButtons,
   },
   data() {
     return {
       example_images: [
         {
           src: '/images/multi_faces.jpg',
-          title: '複数の顔も認識してくれます😁'
+          title: '複数の顔も認識してくれます😁',
         },
         { src: '/images/random.jpg', title: '選ばれる絵文字はランダム😜' },
-        { src: '/images/cat.jpg', title: '動物の顔は認識できないよ😹' }
+        { src: '/images/cat.jpg', title: '動物の顔は認識できないよ😹' },
       ],
-      is_mobile: isMobile.any
+      is_mobile: isMobile.any,
     }
   },
 
   computed: {
-    ...mapState('result', ['result_src'])
-  }
+    ...mapState('result', ['result_src']),
+  },
 }
 </script>
 

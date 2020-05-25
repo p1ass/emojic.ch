@@ -54,11 +54,11 @@ export default {
     return {
       image: undefined,
       isSelected: false,
-      filePpath: ''
+      filePpath: '',
     }
   },
   computed: {
-    ...mapActions('result', ['updateImageAction'])
+    ...mapActions('result', ['updateImageAction']),
   },
 
   watch: {
@@ -68,7 +68,7 @@ export default {
       } else {
         this.isSelected = true
       }
-    }
+    },
   },
 
   methods: {
@@ -95,7 +95,7 @@ export default {
           color: 'danger',
           title: `対応していない画像が選ばれました`,
           text: 'えもじっくはPNG、JPEG形式の画像に対応しています。',
-          acceptText: '閉じる'
+          acceptText: '閉じる',
         })
         return null
       }
@@ -132,7 +132,7 @@ export default {
       this.$vs.loading({
         type: 'radius',
         background: 'rgba(249, 202, 36, 0.8)',
-        color: 'rgb(255, 255, 255)'
+        color: 'rgb(255, 255, 255)',
       })
     },
 
@@ -147,7 +147,7 @@ export default {
         text: '長押しで画像を保存してTwitterでつぶやこう！',
         color: 'success',
         position: 'top-right',
-        time: 4000
+        time: 4000,
       })
     },
     notifyFailed() {
@@ -156,7 +156,7 @@ export default {
         text: '別の画像を選んでみよう！',
         color: 'warning',
         position: 'top-right',
-        time: 4000
+        time: 4000,
       })
     },
 
@@ -166,7 +166,7 @@ export default {
         text: 'さっそく絵文字に変換してみよう',
         color: 'success',
         position: 'top-right',
-        time: 3000
+        time: 3000,
       })
     },
 
@@ -175,7 +175,7 @@ export default {
         color: 'danger',
         title: `対応していない画像が選ばれました`,
         text: 'えもじっくはPNG、JPEG形式の画像に対応しています。',
-        acceptText: '閉じる'
+        acceptText: '閉じる',
       })
     },
     dialogUnExpectedError() {
@@ -183,10 +183,10 @@ export default {
         color: 'danger',
         title: `予期せぬエラーが発生しました。`,
         text: 'しばらく経ってからもう一度お試しください。',
-        acceptText: '閉じる'
+        acceptText: '閉じる',
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -5,20 +5,20 @@ export default {
   // http://blog.yuhiisk.com/archive/2018/05/27/iphone-rotate-image-bug.html
   fixImageOrientationAndSize(image) {
     return new Promise((resolve, reject) => {
-      loadImage.parseMetaData(image, data => {
+      loadImage.parseMetaData(image, (data) => {
         const MAX_SIZE = 1000
 
         const options = {
           maxHeight: MAX_SIZE,
           maxWidth: MAX_SIZE,
-          canvas: true
+          canvas: true,
         }
         if (data.exif) {
           options.orientation = data.exif.get('Orientation')
         }
         loadImage(
           image,
-          canvas => {
+          (canvas) => {
             const dataUri = canvas.toDataURL('image/jpeg')
             resolve(this._dataUriToBlob(dataUri))
           },
@@ -39,5 +39,5 @@ export default {
     }
 
     return new Blob([buffer.buffer], { type })
-  }
+  },
 }
