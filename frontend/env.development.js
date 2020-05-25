@@ -1,3 +1,3 @@
 module.exports = {
-  endpoint: process.env.EMOJIC_DEV_ENDPOINT
+  endpoint: process.env.EMOJIC_DEV_ENDPOINT,
 }

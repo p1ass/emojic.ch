@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'HeaderNav'
+  name: 'HeaderNav',
 }
 </script>
 

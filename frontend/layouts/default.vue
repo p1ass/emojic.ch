@@ -14,8 +14,8 @@ import FooterNav from '~/components/FooterNav'
 export default {
   components: {
     HeaderNav,
-    FooterNav
-  }
+    FooterNav,
+  },
 }
 </script>
 

@@ -1,3 +1,3 @@
 module.exports = {
-  endpoint: 'https://emojic.ch/upload'
+  endpoint: 'https://emojic.ch/upload',
 }

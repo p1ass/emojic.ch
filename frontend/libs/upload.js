@@ -7,7 +7,7 @@ export default {
     try {
       response = await axios.post(endpoint, file, {
         headers,
-        responseType: 'blob'
+        responseType: 'blob',
       })
     } catch (e) {
       throw new Error(e.response.status)
@@ -18,5 +18,5 @@ export default {
     } else {
       return response.data
     }
-  }
+  },
 }
