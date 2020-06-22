@@ -2415,10 +2415,10 @@ bluebird@^3.1.1, bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
   integrity sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w==
 
-blueimp-load-image@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/blueimp-load-image/-/blueimp-load-image-3.0.0.tgz#d71c39440a7d2f1a83e3e86a625e329116a51705"
-  integrity sha512-Q9rFbd4ZUNvzSFmRXx9MoG0RwWwJeMjjEUbG7WIOJgUg22Jgkow0wL5b35B6qwiBscxACW9OHdrP5s2vQ3x8DQ==
+blueimp-load-image@^5.13.0:
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/blueimp-load-image/-/blueimp-load-image-5.13.0.tgz#685d302a5adaf99d980fadf3d94f70a8e6ab7d30"
+  integrity sha512-CMmLihVqW0AtRGObKIRxYaVUj+2hw2MkeNHoD2JuobpKZFnCCUVCBIeyYkh8xiq3DHIfHfvsp9l0VpM30k3EXQ==
 
 bmp-js@^0.1.0:
   version "0.1.0"
