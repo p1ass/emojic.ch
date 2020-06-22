@@ -28,7 +28,7 @@
     "nuxt-sass-resources-loader": "^2.0.5",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
-    "vuesax": "^3.11.15"
+    "vuesax": "^3.11.16"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",
