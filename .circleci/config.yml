@@ -9,7 +9,7 @@ jobs:
 
             - restore_cache:
                   keys:
-                      - v1-{{ checksum "frontend/package.json" }}
+                      - v2-{{ checksum "frontend/package.json" }}
 
             - run:
                   name: Install npm packages
@@ -20,7 +20,7 @@ jobs:
             - save_cache:
                   paths:
                       - frontend/node_modules
-                  key: v1-{{ checksum "frontend/package.json" }}
+                  key: v2-{{ checksum "frontend/package.json" }}
 
             - run:
                   name: Build
@@ -45,7 +45,7 @@ jobs:
 
             - restore_cache:
                   keys:
-                      - v1-{{ checksum "lambda/requirements.txt" }}
+                      - v2-{{ checksum "lambda/requirements.txt" }}
 
             - run:
                   name: Install pip packages
@@ -56,7 +56,7 @@ jobs:
             - save_cache:
                   paths:
                       - '/usr/local/lib/python3.8/site-packages'
-                  key: v1-{{ checksum "lambda/requirements.txt" }}
+                  key: v2-{{ checksum "lambda/requirements.txt" }}
 
             - run:
                   name: Run python tests
@@ -89,7 +89,7 @@ jobs:
 
             - restore_cache:
                   keys:
-                      - v1-{{ checksum "lambda/package-lock.json" }}
+                      - v2-{{ checksum "lambda/package-lock.json" }}
 
             - run:
                   name: Install packages
@@ -100,7 +100,7 @@ jobs:
             - save_cache:
                   paths:
                       - lambda/node_modules
-                  key: v1-{{ checksum "lambda/package-lock.json" }}
+                  key: v2-{{ checksum "lambda/package-lock.json" }}
 
             - run:
                   name: Deploy lambda function in production environment
