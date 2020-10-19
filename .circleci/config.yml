@@ -41,7 +41,7 @@ jobs:
             - checkout
 
             - run: sudo chown -R circleci:circleci /usr/local/bin
-            - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+            - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
 
             - restore_cache:
                   keys:
@@ -55,7 +55,7 @@ jobs:
 
             - save_cache:
                   paths:
-                      - '/usr/local/lib/python3.6/site-packages'
+                      - '/usr/local/lib/python3.8/site-packages'
                   key: v1-{{ checksum "lambda/requirements.txt" }}
 
             - run:
