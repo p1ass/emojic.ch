@@ -26,7 +26,7 @@
     "npm": "^6.14.9",
     "nuxt": "^2.14.10",
     "nuxt-sass-resources-loader": "^2.0.5",
-    "sass-loader": "^10.0.5",
+    "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "vuesax": "^3.12.2"
   },
