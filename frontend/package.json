@@ -27,7 +27,7 @@
     "nuxt": "^2.14.10",
     "nuxt-sass-resources-loader": "^2.0.5",
     "sass-loader": "^10.0.5",
-    "style-loader": "^1.2.1",
+    "style-loader": "^2.0.0",
     "vuesax": "^3.12.2"
   },
   "devDependencies": {
