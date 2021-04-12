@@ -7043,10 +7043,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-material-icons@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/material-icons/-/material-icons-0.5.2.tgz#4b774e8ddedbaf585c536391855baeec59f95e68"
-  integrity sha512-4j0LzymSnpoyzuu6SK7tLA03BX6drnmBFI/2jGX1Ckfa89ykNiLoXr17c8i8YxYAl/pHQKEHaEzlx7zubmD/Bg==
+material-icons@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/material-icons/-/material-icons-0.6.1.tgz#e1be0dd93c3e80ce22ae9b2affccd0308d856d1e"
+  integrity sha512-uF15dnHT0CeseY6zIgOumK3CRpqrhQ1jissbf1Mu992Im1gjXhPKAbF0D4wr0nnryodsXDrX6mxOL1vlU9wz2w==
 
 md5.js@^1.3.4:
   version "1.3.5"
