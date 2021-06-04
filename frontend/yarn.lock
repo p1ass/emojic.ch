@@ -7309,10 +7309,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-material-icons@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/material-icons/-/material-icons-0.5.2.tgz#4b774e8ddedbaf585c536391855baeec59f95e68"
-  integrity sha512-4j0LzymSnpoyzuu6SK7tLA03BX6drnmBFI/2jGX1Ckfa89ykNiLoXr17c8i8YxYAl/pHQKEHaEzlx7zubmD/Bg==
+material-icons@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/material-icons/-/material-icons-0.7.0.tgz#af3f2ef7b64cf4892944b3ae70809be2b8e22a32"
+  integrity sha512-MsgLevM5FOvbLCL2jgEtS1eXbdF8wHsaeMBSd4D/aOkg8T1HmvnU8OIrC/natSfLSJmxh3bYfN8XjO8upYJYrA==
 
 md5.js@^1.3.4:
   version "1.3.5"
